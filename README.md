@@ -2,6 +2,8 @@
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.0.6.
 
+Frontend structure: [Excalidraw link](https://excalidraw.com/#json=MXndE9h4bg5w1BFbguuHb,D3uYARk-Efb_LiCI9S1KWQ)
+
 ## Development server
 
 To start a local development server, run:
