@@ -1,0 +1,125 @@
+/* General layout container */
+.layout {
+    display: grid;
+    grid-template-rows: 60px auto;
+    /* Top navbar height */
+    grid-template-columns: 15% auto;
+    /* Sidebar width */
+    height: 100vh;
+    /* Full viewport height */
+}
+
+.p-menubar-item-link {
+    color: black !important;
+}
+
+/* Top Navbar */
+.top-navbar {
+    grid-column: span 2;
+    /* Spans across both sidebar and content */
+    background-color: #f8f9fa;
+    /* Blue background for navbar */
+    color: white;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.menuTop {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    --p-menubar-background: none;
+    --p-menubar-border-color: none;
+    --p-menubar-item-focus-background: #34d399;
+}
+
+.logout-button {
+    margin-left: auto;
+    cursor: pointer;
+    color: black;
+    /* Ensure text is visible */
+    padding: 0.5rem 1rem;
+    background-color: transparent;
+    border: none;
+    transition: background-color 0.3s ease;
+}
+
+
+
+.top-logo {
+    width: 20%;
+    /* Adjust as needed */
+    height: auto;
+}
+
+/* Sidebar */
+.sidebar {
+    grid-row: span 2;
+    /* Spans the entire height below the top navbar */
+    background-color: #f8f9fa;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 1rem;
+    z-index: 100;
+}
+
+.menuLeft {
+    width: 100%;
+    --p-menubar-background: none;
+    --p-menubar-border-color: none;
+    --p-menubar-root-color: black;
+    --p-menubar-item-focus-background: #34d399;
+}
+
+
+
+.banner {
+    width: 80%;
+    height: auto;
+    margin-bottom: 1rem;
+}
+
+/* Main Content */
+.content {
+    padding: 1rem;
+    overflow-y: auto;
+    /* Allow scrolling if content overflows */
+}
+
+@media (max-width: 768px) {
+    .layout {
+        grid-template-rows: 60px auto;
+        grid-template-columns: 100%;
+        /* Collapse sidebar */
+    }
+
+    .sidebar {
+        display: none;
+        /* Hide sidebar */
+    }
+
+    .content {
+        grid-column: span 1;
+        margin-left: 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .top-navbar {
+        padding: 0.5rem;
+    }
+
+    .top-logo {
+        width: 30px;
+        /* Smaller logo */
+    }
+}
+
+.colorBlack {
+    color: black;
+}
+

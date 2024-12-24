@@ -1,1 +1,30 @@
-<p>dashboard works!</p>
+<div class="layout">
+    <!-- Top Navbar -->
+    <div class="top-navbar">
+        <p-menubar [model]="topItems" class="menuTop colorBlack ">
+            <ng-template #start>
+                <span class="inline-flex items-center gap-2">
+                    <img src="assets/images/bannerLogo.png" alt="Logo" class="top-logo">
+                </span>
+            </ng-template>
+            <ng-template #end>
+                <span class="logout-button">
+                    Logout
+                </span>
+            </ng-template>
+        </p-menubar>
+    </div>
+
+    <!-- Left Sidebar -->
+    <div class="sidebar">
+        <p-menubar [model]="leftItems" class="menuLeft">
+            
+        </p-menubar>
+    </div>
+
+    <!-- Main Content -->
+    <div class="content">
+        <h1>Welcome to the Dashboard</h1>
+        <p>Here is your content area!</p>
+    </div>
+</div>
