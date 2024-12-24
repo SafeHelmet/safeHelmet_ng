@@ -24,6 +24,11 @@
               {
                 "glob": "**/*",
                 "input": "public"
+              },
+              {
+                "glob": "**/*",
+                "input": "src/assets",
+                "output": "assets"
               }
             ],
             "styles": [
@@ -85,8 +90,8 @@
               }
             ],
             "styles": [
-              "node_modules/primeng/resources/themes/aura/theme.css",
-              "node_modules/primeng/resources/primeng.min.css",
+              "node_modules/primeng/resources/themes/lara-light-blue/theme.css",
+              "node_modules/primeng/resources/primeng.css",
               "node_modules/primeicons/primeicons.css",
               "src/styles.css"
             ],

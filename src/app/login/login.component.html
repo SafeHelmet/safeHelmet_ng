@@ -1,1 +1,37 @@
-<p>login works!</p>
+<div class="login-container">
+    <div class="login-card">
+        <img src="assets/images/bannerLogo.png" alt="Logo" class="logo">
+        
+        <div class="card flex justify-center logo-spacing">
+            <p-inputgroup>
+                <p-inputgroup-addon>
+                <span class="pi pi-user"></span>
+                </p-inputgroup-addon>
+                <input pInputText [(ngModel)]="username" placeholder="Username" class="inputUsername" />
+            </p-inputgroup>
+            <p-inputgroup>
+                <p-inputgroup-addon>
+                    <span class="pi pi-lock"></span>
+                </p-inputgroup-addon>
+                <input pInputText [(ngModel)]="password" placeholder="Password" class="inputPassword" />
+            </p-inputgroup>
+            <br>
+            <p-button icon="pi pi-check" class="buttonSubmit" label="Login" (click)="onLogin()"></p-button>
+        </div>
+       <!--  <form #loginForm="ngForm" (ngSubmit)="onLogin()" method="POST">
+            <div class="field">
+                <label for="username">Username</label>
+                <p-inputText id="username" [(ngModel)]="username" name="username" type="text"></p-inputText>
+            </div>
+            <div class="field">
+                <label for="password">Password</label>
+                
+                <p-password id="password" [(ngModel)]="password" name="password" [feedback]="false"
+                    type="password"></p-password>
+            </div>
+            <p-button label="Login" type="submit" [loading]="loading"></p-button>
+        </form> 
+    -->
+    </div>
+</div>
+

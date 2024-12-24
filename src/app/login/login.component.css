@@ -1,0 +1,82 @@
+.login-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 100vh;
+    padding-left: 10%;
+    background-color: #f1f1f1;
+    background-image: url('/assets/images/loginBack.png');
+    background-size: cover;
+    background-position: center;
+}
+
+.login-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 400px;
+}
+
+.login-card h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    font-family: Gilroy;
+    font-weight: 400;
+}
+
+.logo {
+    width: 100%;
+    height: auto;
+}
+
+.inputUsername {
+    width: 100%;
+    height: 40px;
+    border-radius: 5px;
+    /*border: 1px solid #ccc;*/
+
+    --p-inputtext-border-color: none;
+    color: black;
+    padding: 0 10px;
+    background-color: #fff;
+}
+
+.inputPassword {
+    width: 100%;
+    height: 40px;
+    border-radius: 5px;
+    --p-inputtext-border-color: none;
+    color: black;
+    padding: 0 10px;
+    background-color: #fff;
+}
+
+p-inputgroup-addon {
+    background-color: #fff;
+    border: none;
+    --p-inputgroup-addon-border-color: none;
+}
+
+.logo-spacing {
+    margin-top: 10px;
+}
+
+.icon-color {
+    color: #000;
+}
+
+.buttonSubmit {
+    margin-top: 10px;
+        width: 100% !important;
+        /* Ensure it overrides PrimeNG styles */
+        display: flex;
+        /* Ensure it stretches */
+        justify-content: center;
+        /* Center-align the content */
+}
+
+.p-button-icon-only {
+    width: 100% !important;
+    /* Override PrimeNG's default width */
+}
