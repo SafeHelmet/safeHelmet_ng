@@ -1,4 +1,6 @@
 import { Routes } from '@angular/router';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { WorksitesComponent } from './worksites/worksites.component';
 
 export const routes: Routes = [
   {
@@ -12,5 +14,16 @@ export const routes: Routes = [
   {
     path: 'dashboard',
     loadComponent: () => import('./dashboard/dashboard.component').then(m => m.DashboardComponent)
-  }
+  },
+  {
+    path: '',
+    component: DashboardComponent,
+    children: [
+      { path: 'dashboard', component: DashboardComponent },
+      { path: 'worksites', component: WorksitesComponent },
+    ]
+  },
+
+  // Catch-all
+  { path: '**', redirectTo: '' }
 ];
