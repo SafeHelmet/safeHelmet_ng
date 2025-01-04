@@ -1,7 +1,9 @@
 import { Routes } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { WorksitesComponent } from './worksites/worksites.component';
-
+import { ReportsComponent } from './reports/reports.component';
+import { WorksiteDetailComponent } from './worksite-detail/worksite-detail.component';
+import { WorksiteNewComponent } from './worksite-new/worksite-new.component';
 export const routes: Routes = [
   {
     path: '',
@@ -21,6 +23,9 @@ export const routes: Routes = [
     children: [
       { path: 'dashboard', component: DashboardComponent },
       { path: 'worksites', component: WorksitesComponent },
+      { path: 'worksites/:id', component: WorksiteDetailComponent },
+      { path: 'worksite/new', component: WorksiteNewComponent },
+      { path: 'reports', component: ReportsComponent },
     ]
   },
 

@@ -1,0 +1,85 @@
+<div class="row">
+    <div class="column">
+        <h2>Detail</h2>
+    </div>
+    <div class="column">
+        <p-button (click)="edit()" icon="pi pi-pencil" class="float-right margin-right" label="Add Worker" />
+        <p-button (click)="back()" icon="pi pi-angle-left" class="float-right margin-right" label="Back" />
+    </div>
+</div>
+<div>
+    <p *ngIf="worksite">Worksite ID: {{worksite.id}}</p>
+
+</div>
+<div>
+    <p *ngIf="worksite">Worksite Name: {{worksite.name}}</p>
+    <p *ngIf="worksite">Worksite Latitude: {{worksite.latitude}}</p>
+    <p *ngIf="worksite">Worksite Longitude: {{worksite.longitude}}</p>
+    <p *ngIf="worksite">Worksite start_date_of_work: {{worksite.start_date_of_work}}</p>
+    <p *ngIf="worksite">Worksite end_date_of_work: {{worksite.end_date_of_work}}</p>
+    <p *ngIf="worksite">Worksite created_at: {{worksite.created_at}}</p>
+    <p *ngIf="worksite">Worksite address: {{worksite.address}}</p>
+    <p *ngIf="worksite">Worksite city: {{worksite.city}}</p>
+    <p *ngIf="worksite">Worksite state: {{worksite.state}}</p>
+    <p *ngIf="worksite">Worksite zip: {{worksite.zip}}</p>
+</div>
+<div class="map-container" id="map"></div>
+<div class="margin-top">
+    <p-tabs value="0">
+        <p-tablist>
+            <p-tab value="0">
+                <i class="pi pi-users"></i>
+                <span>Workers</span>
+            </p-tab>
+            <p-tab value="1">
+                <i class="pi pi-chart-line"></i>
+                <span>Readings</span>
+            </p-tab>
+        </p-tablist>
+        <p-tabpanels>
+            <p-tabpanel value="0">
+                <p class="m-0">
+                    <p-table [value]="workers" [paginator]="true" [rows]="10" dataKey="id" editMode="row"
+                        [tableStyle]="{'min-width': '50rem'}" class="tableColor">
+                        <ng-template #header>
+                            <tr class="tableHeader">
+                                <th style="width:10%">Code</th>
+                                <th style="width:20%">Name</th>
+                                <th style="width:20%">Surname</th>
+                                <th style="width:5%"></th>
+                                <th style="width:5%"></th>
+                            </tr>
+                        </ng-template>
+                        <ng-template #body let-worker let-ri="rowIndex">
+                            <tr class="tableRow">
+                                <td>
+                                    {{worker.id}}
+                                </td>
+                                <td>
+                                        <ng-template #output>
+                                            {{worker.name}}
+                                        </ng-template>
+                                </td>
+                                <td>
+                                        <ng-template #output>
+                                            {{worker.surname}}
+                                        </ng-template>
+                                </td>
+                                <td>
+                                    <p-button icon="pi pi-info" text rounded severity="secondary"
+                                         />
+                                </td>
+                                <td>
+                                    <p-button icon="pi pi-trash" text rounded severity="secondary" />
+                                </td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </p>
+            </p-tabpanel>
+            <p-tabpanel value="1">
+                <p>Readings</p>
+            </p-tabpanel>
+        </p-tabpanels>
+    </p-tabs>
+</div>

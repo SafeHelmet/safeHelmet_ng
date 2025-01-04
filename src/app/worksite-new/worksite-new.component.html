@@ -1,0 +1,52 @@
+
+<div class="row">
+    <div class="column">
+        <h2>New Worksite</h2>
+    </div>
+    <div class="column">
+        <p-button (click)="back()" icon="pi pi-angle-left" class="float-right margin-right" label="Back" />
+    </div>
+</div>
+
+<p-toast />
+
+<div class="form-container">
+    <form [formGroup]="worksiteForm" (ngSubmit)="addWorksite()">
+        <div class="rowForm">
+            <label for="name">Name:</label>
+            <input id="name" type="text" pInputText formControlName="name" />
+        </div>
+        <div class="rowForm ">
+            <label for="address">Address:</label>
+            <input id="address" type="text" pInputText formControlName="address" />
+        </div>
+        <div class="rowForm">
+            <label for="city">City:</label>
+            <input id="city" type="text" pInputText formControlName="city" />
+        </div>
+        <div class="rowForm">
+            <label for="state">State:</label>
+            <input id="state" type="text" pInputText formControlName="state" />
+        </div>
+        <div class="rowForm">
+            <label for="zip">Zip:</label>
+            <input id="zip" type="text" pInputText formControlName="zip" />
+        </div>
+        <div class="rowForm">
+            <label for="latitude">Latitude:</label>
+            <input id="latitude" type="text" pInputText formControlName="latitude" [(ngModel)]="latitude" readonly />
+        </div>
+        <div class="rowForm">
+            <label for="longitude">Longitude:</label>
+            <input id="longitude" type="text" pInputText formControlName="longitude" [(ngModel)]="longitude" readonly />
+        </div>
+        <div class="map-container" id="map"></div>
+        <br>
+        <p-button (click)="clearMarkers()" label="Clear Markers" icon="pi pi-times" class="right-space margin-top" />
+        <p-button type="submit" label="Submit" icon="pi pi-check" class="margin-left margin-top"></p-button>
+    </form>
+</div>
+
+
+
+<script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>

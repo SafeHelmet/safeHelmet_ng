@@ -36,7 +36,7 @@ export class DashboardComponent {
   leftItems = [
     {
       label: 'Worksites',
-      icon: 'pi pi-exclamation-triangle',
+      icon: 'pi pi-building',
       routerLink: ['/worksites'],
       style: { color: 'black' },
       command: () => this.test()
@@ -44,7 +44,7 @@ export class DashboardComponent {
     {
       label: 'Reports',
       icon: 'pi pi-file-pdf',
-      routerLink: ['/profile'],
+      routerLink: ['/reports'],
       style: { color: 'black' }
     }
   ];
