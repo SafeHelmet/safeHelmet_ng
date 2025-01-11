@@ -1,0 +1,28 @@
+.column {
+    float: left;
+    width: 50%;
+}
+
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.float-right {
+    float: right;
+    margin-top: 18px;
+}
+
+.margin-right {
+    margin-right: 0.5rem;
+}
+
+.margin-top {
+    margin-top: 1rem;
+}
+
+.right-space {
+    margin-right: 1rem;
+}

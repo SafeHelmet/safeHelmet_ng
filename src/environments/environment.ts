@@ -15,6 +15,10 @@ export const RESOLVE_ENV = {
             READING: {
                 BASE: `${ENVIRONMENT.API_URL}/api/v1/readings`,
                 GET_BY_ID: (id: string) => `${ENVIRONMENT.API_URL}/api/v1/readings/${id}`,
+            },
+            HELMETS: {
+                BASE: `${ENVIRONMENT.API_URL}/api/v1/helmets`,
+                GET_BY_ID: (id: string) => `${ENVIRONMENT.API_URL}/api/v1/helmets/${id}`,
             }
         }
     }
