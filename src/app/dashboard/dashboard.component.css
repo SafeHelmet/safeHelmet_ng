@@ -20,7 +20,6 @@
     background-color: #f8f9fa;
     /* Blue background for navbar */
     color: white;
-    display: flex;
     align-items: center;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     z-index: 1000;
@@ -36,22 +35,22 @@
 }
 
 .logout-button {
-    margin-left: auto;
+    margin-left: 10px;
+    margin-bottom: 10px;
     cursor: pointer;
     color: black;
     /* Ensure text is visible */
-    padding: 0.5rem 1rem;
     background-color: transparent;
-    border: none;
-    transition: background-color 0.3s ease;
 }
 
 
 
 .top-logo {
-    width: 20%;
+    width: 25%;
     /* Adjust as needed */
     height: auto;
+    margin-left: 25px;
+    margin-top: 10px;
 }
 
 /* Sidebar */
@@ -355,4 +354,20 @@
         margin-top: 64px;
         margin-left: 0px;
     }
+}
+
+.columnNav {
+    float: left;
+}
+
+/* Clear floats after the columns */
+.rowNav:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.float-rightNav {
+    float: right;
+    margin-right: -20px;
 }

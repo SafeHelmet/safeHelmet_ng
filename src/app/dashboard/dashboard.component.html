@@ -1,18 +1,16 @@
 <div class="layout">
     <!-- Top Navbar -->
     <div class="top-navbar">
-        <p-menubar class="menuTop colorBlack ">
-            <ng-template #start>
-                <span class="inline-flex items-center gap-2">
+        
+            <div class="rowNav">
+                <div class="columnNav logout-button">
                     <img src="assets/images/bannerLogo.png" alt="Logo" class="top-logo">
-                </span>
-            </ng-template>
-            <ng-template #end>
-                <span class="logout-button">
-                    Logout
-                </span>
-            </ng-template>
-        </p-menubar>
+                </div>
+                <div class="columnNav">
+                    <p-button (click)="back()" icon="pi pi-angle-left" class="float-rightNav margin-right" label="Logout" />
+                </div>
+            </div>
+        
     </div>
 
     <!-- Left Sidebar -->

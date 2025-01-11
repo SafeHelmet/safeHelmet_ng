@@ -5,8 +5,9 @@ import { Badge } from 'primeng/badge';
 import { MenuItem } from 'primeng/api';
 import { Menu } from 'primeng/menu';
 import { TestServiceService } from '../services/test-service.service';
-import { RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { RouterLink } from '@angular/router';
+import { Button } from 'primeng/button';
 
 @Component({
   selector: 'app-dashboard',
@@ -17,7 +18,8 @@ import { RouterLink } from '@angular/router';
     Badge,
     Menu,
     RouterLink,
-    RouterOutlet
+    RouterOutlet,
+    Button
   ],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css',
@@ -26,7 +28,7 @@ import { RouterLink } from '@angular/router';
 export class DashboardComponent {
 
 
-  constructor(private testService: TestServiceService) { }
+  constructor(private testService: TestServiceService, private router: Router) { }
   topItems = [
     {
       
@@ -44,7 +46,7 @@ export class DashboardComponent {
     {
       label: 'Reports',
       icon: 'pi pi-file-pdf',
-      routerLink: ['/reports'],
+      routerLink: ['/readings'],
       style: { color: 'black' }
     }
   ];
@@ -58,6 +60,10 @@ export class DashboardComponent {
       next: (data) => console.log('Response:', data),
       error: (err) => console.error('Error:', err)
     });
+  }
+
+  back() {
+    this.router.navigate(['/dashboard']);
   }
 
 
