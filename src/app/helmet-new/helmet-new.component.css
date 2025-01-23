@@ -52,13 +52,7 @@ p-toast {
     --p-toast-error-detail-color: #000000;
 }
 
-.map-container {
-    width: 100%;
-    height: 400px;
-    margin-top: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
+
 
 .margin-left {
     margin-left: 1rem;
@@ -66,30 +60,4 @@ p-toast {
 
 .margin-top {
     margin-top: 1rem;
-}
-
-.p-datepicker-input {
-    --p-inputtext-background: white;
-}
-
-.p-datepicker-panel {
-    --p-datepicker-panel-background: white;
-    --p-datepicker-panel-color: black;
-    --p-datepicker-date-color: black;
-
-}
-
-.p-datepicker-header {
-    --p-datepicker-header-background: white;
-    --p-datepicker-header-color: black;
-    --p-datepicker-select-year-color: black;
-    --p-datepicker-select-month-color: black;
-}
-
-#pn_id_3_panel {
-    top: -100px !important;
-}
-
-#pn_id_4_panel {
-    top: -100px !important;
 }

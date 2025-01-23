@@ -33,6 +33,15 @@
             <input id="zip" type="text" pInputText formControlName="zip" />
         </div>
         <div class="rowForm">
+            <label for="startDate">Procurement start date:</label>
+            <p-datepicker [iconDisplay]="'input'" [showIcon]="true" inputId="icondisplay" formControlName="startDate" dateFormat="dd/mm/yy" [showTime]="true" [hourFormat]="'24'"/>
+        </div>
+        <div class="rowForm">
+            <label for="startDate">Procurement end date:</label>
+            <p-datepicker [iconDisplay]="'input'" [showIcon]="true" inputId="icondisplay" formControlName="endDate"
+                dateFormat="dd/mm/yy" [showTime]="true" [hourFormat]="'24'" />
+        </div>
+        <div class="rowForm">
             <label for="latitude">Latitude:</label>
             <input id="latitude" type="text" pInputText formControlName="latitude" [(ngModel)]="latitude" readonly />
         </div>

@@ -5,6 +5,8 @@ import { ReportsComponent } from './reports/reports.component';
 import { WorksiteDetailComponent } from './worksite-detail/worksite-detail.component';
 import { WorksiteNewComponent } from './worksite-new/worksite-new.component';
 import { ReportDetailComponent } from './report-detail/report-detail.component';
+import { HelmetsComponent } from './helmets/helmets.component';
+import { HelmetNewComponent } from './helmet-new/helmet-new.component';
 
 
 export const routes: Routes = [
@@ -29,7 +31,9 @@ export const routes: Routes = [
       { path: 'worksites/:id', component: WorksiteDetailComponent },
       { path: 'worksite/new', component: WorksiteNewComponent },
       { path: 'readings', component: ReportsComponent },
-      { path: 'readings/:id', component: ReportDetailComponent }
+      { path: 'readings/:id', component: ReportDetailComponent },
+      { path: 'helmets', component: HelmetsComponent },
+      { path: 'helmet/new', component: HelmetNewComponent}
     ]
   },
 

@@ -44,6 +44,12 @@ export class DashboardComponent {
       command: () => this.test()
     },
     {
+      label: 'Helmets',
+      icon: 'pi pi-exclamation-triangle',
+      routerLink: ['/helmets'],
+      style: { color: 'black' }
+    },
+    {
       label: 'Reports',
       icon: 'pi pi-file-pdf',
       routerLink: ['/readings'],

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -10,6 +10,8 @@ import { MessageService } from 'primeng/api';
 import * as L from 'leaflet';
 import { FormsModule } from '@angular/forms';
 import 'leaflet-control-geocoder';
+import { WorksiteService } from '../services/worksite.service';
+import { DatePickerModule } from 'primeng/datepicker'; 
 
 @Component({
   selector: 'app-worksite-new',
@@ -20,11 +22,13 @@ import 'leaflet-control-geocoder';
     ReactiveFormsModule, 
     CommonModule, 
     ToastModule,
-    FormsModule
+    FormsModule,
+    DatePickerModule
   ],
   providers: [MessageService],
   templateUrl: './worksite-new.component.html',
-  styleUrl: './worksite-new.component.css'
+  styleUrl: './worksite-new.component.css',
+  encapsulation: ViewEncapsulation.None
 })
 export class WorksiteNewComponent {
   worksiteForm!: FormGroup;
@@ -33,7 +37,7 @@ export class WorksiteNewComponent {
   public latitude: number | null = null;
   public longitude: number | null = null;
 
-  constructor(private router: Router, private fb: FormBuilder, private messageService: MessageService) {}
+  constructor(private router: Router, private fb: FormBuilder, private messageService: MessageService, private worksiteService: WorksiteService) {}
 
   ngOnInit() {
     const defaultIcon = L.icon({
@@ -53,6 +57,8 @@ export class WorksiteNewComponent {
       city: ['', Validators.required],
       state: ['', Validators.required],
       zip: ['', Validators.required],
+      start_date_of_work: ['', Validators.required],
+      end_date_of_work: ['', Validators.required],
       latitude: [0, Validators.required],
       longitude: [0, Validators.required]
     });
@@ -123,6 +129,17 @@ export class WorksiteNewComponent {
     this.worksiteForm.markAllAsTouched();
     if (this.worksiteForm.valid) {
       console.log(this.worksiteForm.value);
+      const worksiteData = this.worksiteForm.value;
+      this.worksiteService.addWorksite(worksiteData).subscribe({
+        next: (response) => {
+          this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Worksite added successfully!' });
+          this.router.navigate(['/worksites']); // Navigate back to the worksite list
+        },
+        error: (err) => {
+          console.error(err);
+          this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Failed to add worksite' });
+        }
+      });
     } else {
       this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Please fill in all fields' });
     }

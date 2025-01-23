@@ -10,6 +10,11 @@ import { AUTH_TOKEN } from '../../environments/environment.local';
 export class WorksiteService {
   constructor(private http: HttpClient) {}
 
+  addWorksite(worksiteData: any): Observable<any> {
+    const headers = new HttpHeaders().set('Authorization', AUTH_TOKEN);
+    return this.http.post(RESOLVE_ENV.API.ROUTES.WORKSITE.BASE, worksiteData, { headers });
+  }
+
   getWorksites(): Observable<any> {
     const headers = new HttpHeaders().set('Authorization', AUTH_TOKEN);
     return this.http.get(RESOLVE_ENV.API.ROUTES.WORKSITE.BASE, { headers });
@@ -38,5 +43,10 @@ export class WorksiteService {
   getWorkers(id: string): Observable<any> {
     const headers = new HttpHeaders().set('Authorization', AUTH_TOKEN);
     return this.http.get(RESOLVE_ENV.API.ROUTES.WORKSITE.GET_WORKERS(id), { headers });
+  }
+
+  getHelmets(): Observable<any> {
+    const headers = new HttpHeaders().set('Authorization', AUTH_TOKEN);
+    return this.http.get(RESOLVE_ENV.API.ROUTES.HELMETS.BASE, { headers });
   }
 } 

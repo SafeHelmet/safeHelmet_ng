@@ -1,0 +1,37 @@
+<div class="row">
+    <div class="column">
+        <h2>New Helmet</h2>
+    </div>
+    <div class="column">
+        <p-button (click)="back()" icon="pi pi-angle-left" class="float-right margin-right" label="Back" />
+    </div>
+</div>
+
+<p-toast />
+
+<div class="form-container">
+    <form [formGroup]="helmetForm" (ngSubmit)="addHelmet()">
+        <div class="rowForm">
+            <label for="name">Category:</label>
+            <input id="name" type="text" pInputText formControlName="category" />
+        </div>
+        <div class="rowForm ">
+            <label for="address">Current worker:</label>
+            <input id="address" type="text" pInputText formControlName="workerId" />
+        </div>
+        <div class="rowForm">
+            <label for="city">Sensor1:</label>
+            <input id="city" type="text" pInputText formControlName="sensor1" />
+        </div>
+        <div class="rowForm">
+            <label for="city">Sensor2:</label>
+            <input id="city" type="text" pInputText formControlName="sensor2" />
+        </div>
+        <div class="rowForm">
+            <label for="city">Sensor3:</label>
+            <input id="city" type="text" pInputText formControlName="sensor3" />
+        </div>
+        <p-button type="submit" label="Submit" icon="pi pi-check" class="margin-left margin-top"></p-button>
+    </form>
+</div>
+
