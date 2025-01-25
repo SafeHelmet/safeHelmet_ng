@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { RESOLVE_ENV } from '../../environments/environment';
-import { AUTH_TOKEN } from '../../environments/environment.local';
+import { AUTH_TOKEN } from '../../environments/environment.prod';
 
 @Injectable({
   providedIn: 'root'
