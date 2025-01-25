@@ -9,8 +9,10 @@ import { HttpClient } from '@angular/common/http';
 import { MessageModule } from 'primeng/message';
 import { InputGroup } from 'primeng/inputgroup';
 import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
-/*import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http';
-/*import { environment } from 'src/environments/environment'; */
+/*import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http'; */
+
+import { RESOLVE_ENV } from '../../environments/environment';
+
 
 @Component({
   selector: 'app-login',
@@ -34,6 +36,7 @@ export class LoginComponent {
   password: string = '';
   loading: boolean = false;
   msg: string = '';
+  errorMessage: string = '';
 
 
   constructor(
@@ -46,6 +49,12 @@ export class LoginComponent {
   }
 
   onLogin() {
+    if (!this.username || !this.password) {
+      this.errorMessage = 'Please fill in both fields.';
+      return;
+    }
+
+    const loginUrl = `${RESOLVE_ENV.API.BASE_URL}/login`;
     this.loading = true;
     
     const credentials = {
@@ -55,7 +64,21 @@ export class LoginComponent {
 
     console.log(credentials);
 
-    this.router.navigate(['/dashboard']);
+    this.http.post(loginUrl, { username: this.username, password: this.password }).subscribe({
+      next: (response: any) => {
+        this.loading = false;
+
+        // Store token or user data if needed
+        localStorage.setItem('token', response.token);
+
+        this.router.navigate(['/worksites']);
+      },
+      error: (error) => {
+        this.loading = false;
+        this.errorMessage = error.error.message || 'Login failed. Please try again.';
+      },
+    });
+
 
     // Use POST method to send credentials
     /*this.http.post(`${environment.apiUrl}/auth/login`, credentials, {

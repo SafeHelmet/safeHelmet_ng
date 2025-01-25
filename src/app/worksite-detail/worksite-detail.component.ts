@@ -40,8 +40,8 @@ export class WorksiteDetailComponent {
     this.router.navigate(['/worksites']);
   }
 
-  edit() {
-    console.log("edit");
+  newWorker() {
+    this.router.navigate(['worker/new']);
   }
 
   ngOnInit() {
@@ -63,7 +63,6 @@ export class WorksiteDetailComponent {
       this.worksiteService.getWorkers(this.worksiteId).subscribe(
         (data) => {
           this.workers = data;
-          this.initializeMap();
         },
         (error) => {
           console.error('Error fetching workers:', error);
@@ -71,6 +70,7 @@ export class WorksiteDetailComponent {
       );
     }
   }
+  
   initializeMap() {
     if (this.worksite) {
       this.map = L.map('map').setView([this.worksite.latitude, this.worksite.longitude], 13);

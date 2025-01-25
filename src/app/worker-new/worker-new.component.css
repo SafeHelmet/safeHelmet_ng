@@ -1,0 +1,65 @@
+.column {
+    float: left;
+    width: 50%;
+}
+
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.float-right {
+    float: right;
+    margin-top: 18px;
+}
+
+.rowForm {
+    display: flex;
+    align-items: center;
+    /* Aligns labels and inputs vertically */
+    margin-bottom: 1rem;
+    /* Adds spacing between rows */
+}
+
+label {
+    flex: 0 0 25%;
+    /* Fixed width for labels (20% of the container) */
+    text-align: left;
+    /* Aligns the label text to the right */
+    margin-right: 4rem;
+    /* Space between label and input */
+}
+
+input {
+    flex: 1;
+    /* Input takes the remaining space */
+    padding: 0.5rem;
+    --p-inputtext-background: #f0f0f0;
+    --p-inputtext-color: #000000;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.form-container {
+    max-width: 800px;
+    /* Optional: Limits the form width */
+
+}
+
+p-toast {
+    --p-toast-error-detail-color: #000000;
+}
+
+
+.margin-left {
+    margin-left: 1rem;
+}
+
+.margin-top {
+    margin-top: 1rem;
+}
+
+
+

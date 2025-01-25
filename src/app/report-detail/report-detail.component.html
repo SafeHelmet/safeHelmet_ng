@@ -7,17 +7,34 @@
         <p-button (click)="back()" icon="pi pi-angle-left" class="float-right margin-right" label="Back" />
     </div>
 </div>
-<div>
-    <p *ngIf="reading">Reading ID: {{reading.id}}</p>
-
-</div>
-<div>
-    <p *ngIf="reading">Reading Worker: {{name}}{{surname}}</p>
-    <p *ngIf="reading">Reading Worksite: {{worksitename}}</p>
-    <p *ngIf="reading">Reading Read at: {{reading.read_at}}</p>
-    <p *ngIf="reading">Reading Sensor1: {{reading.sensor1}}</p>
-    <p *ngIf="reading">Reading Sensor2: {{reading.sensor2}}</p>
-    <p *ngIf="reading">Reading Sensor3: {{reading.sensor3}}</p>
-    <p *ngIf="reading">Reading anomalous: {{reading.anomalous}}</p>
+<div class="details-container">
+    <div class="detail-item" *ngIf="reading">
+        <strong>Reading ID:</strong> {{reading.id}}
+    </div>
+    <div class="detail-item" *ngIf="reading">
+        <strong>Worker:</strong> {{name}} {{surname}}
+    </div>
+    <div class="detail-item" *ngIf="reading">
+        <strong>Worksite:</strong> {{worksitename}}
+    </div>
+    <div class="detail-item" *ngIf="reading">
+        <strong>Read At:</strong> {{reading.read_at}}
+    </div>
+    <div class="detail-item" *ngIf="reading">
+        <strong>Sensor 1:</strong> {{reading.sensor1}}
+    </div>
+    <div class="detail-item" *ngIf="reading">
+        <strong>Sensor 2:</strong> {{reading.sensor2}}
+    </div>
+    <div class="detail-item" *ngIf="reading">
+        <strong>Sensor 3:</strong> {{reading.sensor3}}
+    </div>
+    <div class="detail-item anomalous" *ngIf="reading">
+        <strong>Anomalous:</strong>
+        <span [ngStyle]="{'color': reading.anomalous ? 'red' : 'inherit'}">
+            {{reading.anomalous}}
+            <i *ngIf="reading.anomalous" class="pi pi-exclamation-triangle" style="margin-left: 5px;"></i>
+        </span>
+    </div>
 </div>
 

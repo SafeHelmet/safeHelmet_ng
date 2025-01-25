@@ -7,6 +7,8 @@ import { WorksiteNewComponent } from './worksite-new/worksite-new.component';
 import { ReportDetailComponent } from './report-detail/report-detail.component';
 import { HelmetsComponent } from './helmets/helmets.component';
 import { HelmetNewComponent } from './helmet-new/helmet-new.component';
+import { WorkerNewComponent } from './worker-new/worker-new.component';
+import { AnomaliesComponent } from './anomalies/anomalies.component';
 
 
 export const routes: Routes = [
@@ -33,7 +35,9 @@ export const routes: Routes = [
       { path: 'readings', component: ReportsComponent },
       { path: 'readings/:id', component: ReportDetailComponent },
       { path: 'helmets', component: HelmetsComponent },
-      { path: 'helmet/new', component: HelmetNewComponent}
+      { path: 'helmet/new', component: HelmetNewComponent },
+      { path: 'worker/new', component: WorkerNewComponent },
+      { path: 'anomalies', component: AnomaliesComponent }
     ]
   },
 

@@ -54,6 +54,12 @@ export class DashboardComponent {
       icon: 'pi pi-file-pdf',
       routerLink: ['/readings'],
       style: { color: 'black' }
+    },
+    {
+      label: 'Anomalies',
+      icon: 'pi pi-bell',
+      routerLink: ['/anomalies'],
+      style: { color: 'black' }
     }
   ];
 

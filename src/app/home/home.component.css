@@ -91,3 +91,56 @@
     color: #fff;
     border: none;
 }
+
+.info-card {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    background: white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    border-radius: 20px;
+    padding: 30px;
+    width: 80%;
+    max-width: 800px;
+    margin: 50px auto;
+    animation: fadeIn 1s ease-out;
+}
+
+.icon-container {
+    background: #000;
+    color: #fff;
+    font-size: 2rem;
+    padding: 15px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 20px;
+}
+
+.info-text h3 {
+    font-family: Gilroy;
+    font-size: 24px;
+    font-weight: 600;
+    margin: 0;
+    color: #333;
+}
+
+.info-text p {
+    font-family: Gilroy;
+    font-size: 16px;
+    margin: 5px 0 0;
+    color: #666;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
