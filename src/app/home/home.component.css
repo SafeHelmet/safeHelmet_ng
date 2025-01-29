@@ -144,3 +144,12 @@
         transform: translateY(0);
     }
 }
+
+
+model-viewer {
+    max-width: 100%;
+    height: auto;
+    border: none;
+    display: block;
+    margin: 0 auto;
+}

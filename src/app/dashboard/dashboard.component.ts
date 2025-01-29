@@ -60,6 +60,12 @@ export class DashboardComponent {
       icon: 'pi pi-bell',
       routerLink: ['/anomalies'],
       style: { color: 'black' }
+    },
+    {
+      label: 'Accounts',
+      icon: 'pi pi-user',
+      routerLink: ['/accounts'],
+      style: { color: 'black' }
     }
   ];
 

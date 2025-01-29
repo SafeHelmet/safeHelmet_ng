@@ -31,6 +31,7 @@ export class WorksiteDetailComponent {
         this.worksiteId = id;
         this.worksiteService.getWorksiteById(id).subscribe(worksite => {
           this.worksite = worksite;
+          this.initializeMap();
         });
       }
     });
@@ -44,6 +45,10 @@ export class WorksiteDetailComponent {
     this.router.navigate(['worker/new']);
   }
 
+  editWorker() {
+    this.router.navigate(['worksite/'+this.worksiteId+'/edit']);
+  }
+
   ngOnInit() {
     const defaultIcon = L.icon({
       iconUrl: 'assets/images/leaflet/marker-icon.png',
@@ -55,21 +60,16 @@ export class WorksiteDetailComponent {
       shadowSize: [41, 41]
     });
     L.Marker.prototype.options.icon = defaultIcon;
-    this.getWorkers();
+    //this.getWorkers();
   }
 
-  getWorkers() {
+  /* getWorkers() {
     if (this.worksiteId) {
-      this.worksiteService.getWorkers(this.worksiteId).subscribe(
-        (data) => {
-          this.workers = data;
-        },
-        (error) => {
-          console.error('Error fetching workers:', error);
-        }
-      );
+      this.worksiteService.getWorkers(this.worksiteId).subscribe( workers => {
+        this.workers = workers;
+      });
     }
-  }
+  } */
   
   initializeMap() {
     if (this.worksite) {

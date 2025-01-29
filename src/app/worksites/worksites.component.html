@@ -3,13 +3,37 @@
         <h2>Worksites</h2>
     </div>
     <div class="column">
-        <p-button (click)="newWorksite()" icon="pi pi-plus" class="float-right"/>
+        <p-button (click)="newWorksite()" icon="pi pi-plus" class="float-right"></p-button>
     </div>
 </div>
 
+<div class="row">
+    <p-button (click)="toggleFilterInput()" label="Filter" class="filterButt"></p-button>
+</div>
 
+<div *ngIf="showFilterInput" class="filter-row">
+    <div class="form-container">
+        <form [formGroup]="filterWorksiteForm" (ngSubmit)="filterWorksites()">
+            <div class="rowForm">
+                <div class="column-filter">
+                    <input id="name" type="text" pInputText formControlName="name" />
+                </div>
+                <div class="column-filter">
+                    <input id="name" type="text" pInputText formControlName="name" />
+                </div>
+                <div class="column-filter">
+                    <input id="name" type="text" pInputText formControlName="name" />
+                </div>
+                <div class="column-filter">
+                    <p-button label="Cerca" class=""></p-button>
+                </div>
+            </div>
+        </form>
+    </div>
 
-<p-toast />
+</div>
+
+<p-toast></p-toast>
 <p-confirmPopup>
     <ng-template #content let-message>
         <div
@@ -19,21 +43,17 @@
         </div>
     </ng-template>
 </p-confirmPopup>
-<p-button (click)="confirm()" label="Filter" class="filterButt" />
 
 <br>
 
-<p-table [value]="worksites"
-         [paginator]="true"
-         [rows]="10"
-         dataKey="id" 
-         editMode="row" 
-         [tableStyle]="{'min-width': '50rem'}"
-         class="tableColor">
+<p-table [value]="filteredWorksites" [paginator]="true" [rows]="10" dataKey="id" editMode="row"
+    [tableStyle]="{ 'min-width': '50rem' }" class="tableColor">
     <ng-template #header>
         <tr class="tableHeader">
             <th style="width:10%">Code</th>
-            <th style="width:20%">Name</th>
+            <th pSortableColumn="name" style="width:20%">Name
+                <p-sortIcon field="name" />
+            </th>
             <th style="width:20%">Address</th>
             <th style="width:20%">City</th>
             <th style="width:10%">State</th>
@@ -44,16 +64,14 @@
     </ng-template>
     <ng-template #body let-worksite let-editing="editing" let-ri="rowIndex">
         <tr [pEditableRow]="worksite" class="tableRow">
-            <td>
-                {{worksite.id}}
-            </td>
+            <td>{{ worksite.id }}</td>
             <td>
                 <p-cellEditor>
                     <ng-template #input>
                         <input pInputText type="text" [(ngModel)]="worksite.name" required />
                     </ng-template>
                     <ng-template #output>
-                        {{worksite.name}}
+                        {{ worksite.name }}
                     </ng-template>
                 </p-cellEditor>
             </td>
@@ -63,7 +81,7 @@
                         <input pInputText type="text" [(ngModel)]="worksite.address" />
                     </ng-template>
                     <ng-template #output>
-                        {{worksite.address}}
+                        {{ worksite.address }}
                     </ng-template>
                 </p-cellEditor>
             </td>
@@ -73,7 +91,7 @@
                         <input pInputText type="text" [(ngModel)]="worksite.city" />
                     </ng-template>
                     <ng-template #output>
-                        {{worksite.city}}
+                        {{ worksite.city }}
                     </ng-template>
                 </p-cellEditor>
             </td>
@@ -83,7 +101,7 @@
                         <input pInputText type="text" [(ngModel)]="worksite.state" />
                     </ng-template>
                     <ng-template #output>
-                        {{worksite.state}}
+                        {{ worksite.state }}
                     </ng-template>
                 </p-cellEditor>
             </td>
@@ -93,12 +111,13 @@
                         <input pInputText type="text" [(ngModel)]="worksite.zip" />
                     </ng-template>
                     <ng-template #output>
-                        {{worksite.zip}}
+                        {{ worksite.zip }}
                     </ng-template>
                 </p-cellEditor>
             </td>
             <td>
-                <p-button icon="pi pi-info" text rounded severity="secondary" [routerLink]="['/worksites', worksite.id]"/>
+                <p-button icon="pi pi-info" text rounded severity="secondary"
+                    [routerLink]="['/worksites', worksite.id]"></p-button>
             </td>
             <td>
                 <div class="flex items-center justify-center gap-1">

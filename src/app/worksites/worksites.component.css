@@ -10,6 +10,11 @@
     clear: both;
 }
 
+.column-filter {
+    float: left;
+    width: 40%;
+}
+
 .float-right {
     float: right;
     margin-top: 18px;
@@ -60,8 +65,10 @@ p-paginator {
 .tableHeader {
     --p-datatable-header-cell-background: #f1f1f1;
     --p-datatable-header-cell-color: #000;
+    --p-datatable-header-cell-selected-color: #34d399;
+    --p-datatable-header-cell-selected-background: #f1f1f1;
 }
 
-.filterButt {
-    margin-bottom: 5px;
+div.filterButt {
+    margin-bottom: 10px;
 }

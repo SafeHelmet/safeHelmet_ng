@@ -9,6 +9,9 @@ import { HelmetsComponent } from './helmets/helmets.component';
 import { HelmetNewComponent } from './helmet-new/helmet-new.component';
 import { WorkerNewComponent } from './worker-new/worker-new.component';
 import { AnomaliesComponent } from './anomalies/anomalies.component';
+import { AccountsComponent } from './accounts/accounts.component';
+import { AccountNewComponent } from './account-new/account-new.component';
+import { WorksiteEditComponent } from './worksite-edit/worksite-edit.component';
 
 
 export const routes: Routes = [
@@ -32,12 +35,15 @@ export const routes: Routes = [
       { path: 'worksites', component: WorksitesComponent },
       { path: 'worksites/:id', component: WorksiteDetailComponent },
       { path: 'worksite/new', component: WorksiteNewComponent },
+      { path: 'worksite/:id/edit', component: WorksiteEditComponent },
       { path: 'readings', component: ReportsComponent },
       { path: 'readings/:id', component: ReportDetailComponent },
       { path: 'helmets', component: HelmetsComponent },
       { path: 'helmet/new', component: HelmetNewComponent },
       { path: 'worker/new', component: WorkerNewComponent },
-      { path: 'anomalies', component: AnomaliesComponent }
+      { path: 'anomalies', component: AnomaliesComponent },
+      { path: 'accounts', component: AccountsComponent },
+      { path: 'accounts/new', component: AccountNewComponent }
     ]
   },
 

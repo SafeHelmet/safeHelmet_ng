@@ -1,17 +1,17 @@
-
 <div class="row">
     <div class="column">
-        <h2>New Worksite</h2>
+        <h2>Edit Worksite</h2>
     </div>
     <div class="column">
+        <p-button (click)="back()" icon="pi pi-trash" class="float-right margin-right" label="Delete" />
         <p-button (click)="back()" icon="pi pi-angle-left" class="float-right margin-right" label="Back" />
     </div>
 </div>
 
 <p-toast />
 
-<div class="form-container">
-    <form [formGroup]="worksiteForm" (ngSubmit)="addWorksite()">
+<div class="form-container" *ngIf="worksiteForm">
+    <form [formGroup]="worksiteForm" (ngSubmit)="editWorksite()">
         <div class="rowForm">
             <label for="name">Name:</label>
             <input id="name" type="text" pInputText formControlName="name" />
@@ -33,21 +33,22 @@
             <input id="zip" type="text" pInputText formControlName="zip" />
         </div>
         <div class="rowForm">
-            <label for="startDate">Procurement start date:</label>
-            <p-datepicker [iconDisplay]="'input'" [showIcon]="true" inputId="icondisplay" formControlName="start_date_of_work" dateFormat="dd/mm/yy" [showTime]="true" [hourFormat]="'24'"/>
+            <label for="start_date_of_work">Procurement start date:</label>
+            <p-datepicker [iconDisplay]="'input'" [showIcon]="true" inputId="icondisplay"
+                formControlName="start_date_of_work" dateFormat="dd/mm/yy" [showTime]="true" [hourFormat]="'24'" />
         </div>
         <div class="rowForm">
-            <label for="startDate">Procurement end date:</label>
-            <p-datepicker [iconDisplay]="'input'" [showIcon]="true" inputId="icondisplay" formControlName="end_date_of_work"
-                dateFormat="dd/mm/yy" [showTime]="true" [hourFormat]="'24'" />
+            <label for="end_date_of_work">Procurement end date:</label>
+            <p-datepicker [iconDisplay]="'input'" [showIcon]="true" inputId="icondisplay"
+                formControlName="end_date_of_work" dateFormat="dd/mm/yy" [showTime]="true" [hourFormat]="'24'" />
         </div>
         <div class="rowForm">
             <label for="latitude">Latitude:</label>
-            <input id="latitude" type="text" pInputText formControlName="latitude" [(ngModel)]="latitude" readonly />
+            <input id="latitude" type="text" pInputText formControlName="latitude"  readonly />
         </div>
         <div class="rowForm">
             <label for="longitude">Longitude:</label>
-            <input id="longitude" type="text" pInputText formControlName="longitude" [(ngModel)]="longitude" readonly />
+            <input id="longitude" type="text" pInputText formControlName="longitude"  readonly />
         </div>
         <div class="map-container" id="map"></div>
         <br>

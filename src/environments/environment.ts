@@ -1,4 +1,6 @@
-import { ENVIRONMENT } from './environment.prod';
+import { ENVIRONMENT } from "../../etc/secrets/environment.prod";
+
+
 
 export const RESOLVE_ENV = {
     API: {
