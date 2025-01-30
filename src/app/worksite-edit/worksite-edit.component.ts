@@ -129,7 +129,7 @@ export class WorksiteEditComponent {
         return;
       }
       const worksiteData = this.worksiteForm.value;
-      this.worksiteService.editWorksite(worksiteData, this.worksiteId).subscribe({
+      this.worksiteService.editWorksite(this.worksiteId, worksiteData).subscribe({
         next: (response) => {
           this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Worksite added successfully!' });
           this.router.navigate(['/worksites/'+this.worksiteId]); // Navigate back to the worksite list
