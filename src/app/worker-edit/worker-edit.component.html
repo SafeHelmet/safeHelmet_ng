@@ -1,16 +1,23 @@
+<p-confirmDialog #confirmDialog [message]="deleteMessage" header="Confirm" icon="pi pi-exclamation-triangle"
+    [acceptLabel]="'Yes'" [rejectLabel]="'No'" (accept)="onConfirmDelete()" (reject)="onRejectDelete()">
+</p-confirmDialog>
+
+
+
 <div class="row">
     <div class="column">
-        <h2>New Worker</h2>
+        <h2>Edit Worker</h2>
     </div>
     <div class="column">
+        <p-button (click)="confirmDelete()" icon="pi pi-trash" class="float-right margin-right" label="Delete" />
         <p-button (click)="back()" icon="pi pi-angle-left" class="float-right margin-right" label="Back" />
     </div>
 </div>
 
 <p-toast />
 
-<div class="form-container">
-    <form [formGroup]="workerForm" (ngSubmit)="addWorker()">
+<div class="form-container" *ngIf="workerForm">
+    <form [formGroup]="workerForm" (ngSubmit)="editWorker()">
         <div class="rowForm">
             <label for="name">Name:</label>
             <input id="name" type="text" pInputText formControlName="name" />
@@ -27,6 +34,7 @@
             <label for="phone">Phone:</label>
             <input id="phone" type="text" pInputText formControlName="phone" />
         </div>
+        <br>
         <p-button type="submit" label="Submit" icon="pi pi-check" class="margin-left margin-top"></p-button>
     </form>
 </div>

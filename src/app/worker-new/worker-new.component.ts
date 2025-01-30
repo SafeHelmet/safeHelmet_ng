@@ -41,7 +41,9 @@ export class WorkerNewComponent {
     this.workerForm = this.fb.group({
       name: ['', Validators.required],
       surname: ['', Validators.required],
-      worksiteId: ['', Validators.required]
+      email: ['', Validators.required],
+      phone: ['', Validators.required]
+      //worksiteId: metterci un l'id del cantiere associato
     });
   }
 

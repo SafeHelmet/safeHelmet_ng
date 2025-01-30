@@ -55,4 +55,24 @@ export class WorksiteService {
     const headers = new HttpHeaders().set('Authorization', ENVIRONMENT.AUTH_TOKEN);
     return this.http.get(RESOLVE_ENV.API.ROUTES.HELMETS.BASE, { headers });
   }
+
+  getAllWorkers(): Observable<any> {
+    const headers = new HttpHeaders().set('Authorization', ENVIRONMENT.AUTH_TOKEN);
+    return this.http.get(RESOLVE_ENV.API.ROUTES.WORKERS.BASE, { headers });
+  }
+
+  getWorkerById(id: string): Observable<any> {
+    const headers = new HttpHeaders().set('Authorization', ENVIRONMENT.AUTH_TOKEN);
+    return this.http.get(RESOLVE_ENV.API.ROUTES.WORKERS.GET_BY_ID(id), { headers });
+  }
+
+  editWorkerById(id: string, worker: any): Observable<any> {
+    const headers = new HttpHeaders().set('Authorization', ENVIRONMENT.AUTH_TOKEN);
+    return this.http.put(RESOLVE_ENV.API.ROUTES.WORKERS.UPDATE(id), worker, { headers });
+  }
+
+  deleteWorker(id: string): Observable<any> {
+    const headers = new HttpHeaders().set('Authorization', ENVIRONMENT.AUTH_TOKEN);
+    return this.http.delete(RESOLVE_ENV.API.ROUTES.WORKERS.DELETE(id), { headers });
+  }
 } 

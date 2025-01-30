@@ -21,6 +21,12 @@ export const RESOLVE_ENV = {
             HELMETS: {
                 BASE: `${ENVIRONMENT.API_URL}/api/v1/helmets`,
                 GET_BY_ID: (id: string) => `${ENVIRONMENT.API_URL}/api/v1/helmets/${id}`,
+            },
+            WORKERS: {
+                BASE: `${ENVIRONMENT.API_URL}/api/v1/workers`,
+                GET_BY_ID: (id: string) => `${ENVIRONMENT.API_URL}/api/v1/workers/${id}`,
+                UPDATE: (id: string) => `${ENVIRONMENT.API_URL}/api/v1/workers/${id}`,
+                DELETE: (id: string) => `${ENVIRONMENT.API_URL}/api/v1/workers/${id}`
             }
         }
     }

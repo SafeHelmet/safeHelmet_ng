@@ -49,6 +49,7 @@ export class LoginComponent {
   }
 
   onLogin() {
+    this.router.navigate(['/worksites']);
     if (!this.username || !this.password) {
       this.errorMessage = 'Please fill in both fields.';
       return;
@@ -64,7 +65,7 @@ export class LoginComponent {
 
     console.log(credentials);
 
-    this.http.post(loginUrl, { username: this.username, password: this.password }).subscribe({
+    /* this.http.post(loginUrl, { username: this.username, password: this.password }).subscribe({
       next: (response: any) => {
         this.loading = false;
 
@@ -77,7 +78,7 @@ export class LoginComponent {
         this.loading = false;
         this.errorMessage = error.error.message || 'Login failed. Please try again.';
       },
-    });
+    }); */
 
 
     // Use POST method to send credentials

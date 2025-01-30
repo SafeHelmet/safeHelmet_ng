@@ -1,9 +1,9 @@
 export interface Worker {
     id?: number;
-    firstName: string;
-    lastName: string;
+    name: string;
+    surname: string;
     email: string;
-    phone?: string;
+    phone: string;
     active: boolean;
     createdAt?: Date;
     updatedAt?: Date;

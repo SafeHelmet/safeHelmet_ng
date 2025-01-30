@@ -8,6 +8,8 @@ import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { ToastModule } from 'primeng/toast';
 import { WorksiteService } from '../services/worksite.service';
+import { AutoCompleteModule } from 'primeng/autocomplete';
+
 
 @Component({
   selector: 'app-helmet-new',
@@ -17,7 +19,8 @@ import { WorksiteService } from '../services/worksite.service';
             ReactiveFormsModule,
             CommonModule,
             ToastModule,
-            FormsModule
+            FormsModule,
+            AutoCompleteModule
            ],
   providers: [MessageService],
   templateUrl: './helmet-new.component.html',
@@ -26,6 +29,8 @@ import { WorksiteService } from '../services/worksite.service';
 })
 export class HelmetNewComponent {
   helmetForm!: FormGroup;
+  workers: Worker[] = [];
+  filteredWorkers: Worker[] = [];
 
   constructor(private router: Router, private fb: FormBuilder, private messageService: MessageService, private worksiteService: WorksiteService) {}
 
@@ -42,6 +47,7 @@ export class HelmetNewComponent {
   back() {
     this.router.navigate(['/helmets']);
   }
+
 
   addHelmet() {
     this.helmetForm.markAllAsTouched();

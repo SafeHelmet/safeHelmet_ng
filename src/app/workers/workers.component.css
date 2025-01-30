@@ -1,0 +1,74 @@
+.column {
+    float: left;
+    width: 50%;
+}
+
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.column-filter {
+    float: left;
+    width: 40%;
+}
+
+.float-right {
+    float: right;
+    margin-top: 18px;
+}
+
+p-table {
+    margin-top: 10px;
+}
+
+p-paginator {
+    --p-paginator-background: #f1f1f1;
+    --p-paginator-nav-button-selected-background: #34d399;
+}
+
+.tableColor {
+    --p-content-background: #f1f1f1;
+    --p-datatable-header-cell-background: #f1f1f1;
+    --p-datatable-header-cell-text-color: #000;
+    --p-datatable-header-cell-text-font-weight: 600;
+}
+
+.tableColor .p-datatable-header {
+    background-color: #f1f1f1;
+}
+
+.tableColor .p-datatable-body {
+    background-color: #f1f1f1;
+}
+
+.tableColor .p-datatable-body-cell {
+    background-color: #f1f1f1;
+}
+
+.tableColor .p-datatable-body-row {
+    --p-datatable-row-background: #f1f1f1;
+}
+
+.tableRow {
+    --p-datatable-row-background: #f1f1f1;
+    --p-datatable-row-color: #000;
+}
+
+.tableRow:hover {
+    --p-datatable-row-background: #e1e1e1;
+    --p-datatable-row-color: #000;
+}
+
+.tableHeader {
+    --p-datatable-header-cell-background: #f1f1f1;
+    --p-datatable-header-cell-color: #000;
+    --p-datatable-header-cell-selected-color: #34d399;
+    --p-datatable-header-cell-selected-background: #f1f1f1;
+}
+
+div.filterButt {
+    margin-bottom: 10px;
+}
