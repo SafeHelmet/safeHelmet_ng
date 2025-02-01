@@ -38,7 +38,17 @@
         <strong>Worksite zip:</strong> {{worksite.zip}}
     </div>
 </div>
+<!-- <div class="details-container">
+    <div *ngIf="weather">
+        <h3>Current Weather</h3>
+        <img [src]="weather.icon" alt="Weather Icon" />
+        <p>Temperature: {{ weather.temperature }}°C</p>
+        <p>Humidity: {{ weather.humidity }}%</p>
+        <p>PM10: {{ weather.pm10 }} μg/m³</p>
+    </div>
 
+</div>
+ -->
 <div class="map-container" id="map"></div>
 <div class="margin-top">
     <p-tabs value="0">
