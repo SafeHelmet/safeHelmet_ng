@@ -8,22 +8,37 @@
         <p-button (click)="back()" icon="pi pi-angle-left" class="float-right margin-right" label="Back" />
     </div>
 </div>
-<div>
-    <p *ngIf="worksite">Worksite ID: {{worksite.id}}</p>
 
+<div class="details-container">
+    <div class="detail-item" *ngIf="worksite">
+        <strong>Worksite Name:</strong> {{worksite.name}}
+    </div>
+    <div class="detail-item" *ngIf="worksite">
+        <strong>Worksite Latitude:</strong> {{worksite.latitude}}
+    </div>
+    <div class="detail-item" *ngIf="worksite">
+        <strong>Worksite Longitude:</strong> {{worksite.longitude}}
+    </div>
+    <div class="detail-item" *ngIf="worksite">
+        <strong>Worksite start_date_of_work:</strong> {{worksite.start_date_of_work}}
+    </div>
+    <div class="detail-item" *ngIf="worksite">
+        <strong>Worksite end_date_of_work:</strong> {{worksite.end_date_of_work}}
+    </div>
+    <div class="detail-item" *ngIf="worksite">
+        <strong>Worksite address:</strong> {{worksite.address}}
+    </div>
+    <div class="detail-item" *ngIf="worksite">
+        <strong>Worksite city:</strong> {{worksite.city}}
+    </div>
+    <div class="detail-item" *ngIf="worksite">
+        <strong>Worksite state:</strong> {{worksite.state}}
+    </div>
+    <div class="detail-item" *ngIf="worksite">
+        <strong>Worksite zip:</strong> {{worksite.zip}}
+    </div>
 </div>
-<div>
-    <p *ngIf="worksite">Worksite Name: {{worksite.name}}</p>
-    <p *ngIf="worksite">Worksite Latitude: {{worksite.latitude}}</p>
-    <p *ngIf="worksite">Worksite Longitude: {{worksite.longitude}}</p>
-    <p *ngIf="worksite">Worksite start_date_of_work: {{worksite.start_date_of_work}}</p>
-    <p *ngIf="worksite">Worksite end_date_of_work: {{worksite.end_date_of_work}}</p>
-    <p *ngIf="worksite">Worksite created_at: {{worksite.created_at}}</p>
-    <p *ngIf="worksite">Worksite address: {{worksite.address}}</p>
-    <p *ngIf="worksite">Worksite city: {{worksite.city}}</p>
-    <p *ngIf="worksite">Worksite state: {{worksite.state}}</p>
-    <p *ngIf="worksite">Worksite zip: {{worksite.zip}}</p>
-</div>
+
 <div class="map-container" id="map"></div>
 <div class="margin-top">
     <p-tabs value="0">

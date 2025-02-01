@@ -11,11 +11,22 @@ import { Worksite } from '../models/worksite';
 import { RouterModule } from '@angular/router';
 import { WorksiteService } from '../services/worksite.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { DialogModule } from 'primeng/dialog';
+import { InputTextModule } from 'primeng/inputtext';
 
 @Component({
   selector: 'app-worksites',
   standalone: true,
-  imports: [ConfirmPopupModule, ToastModule, ButtonModule, TableModule, FormsModule, CommonModule, RouterModule, ReactiveFormsModule],
+  imports: [ConfirmPopupModule,
+     ToastModule,
+      ButtonModule,
+      TableModule,
+      FormsModule,
+      CommonModule,
+      RouterModule,
+      ReactiveFormsModule,
+      DialogModule,
+    InputTextModule],
   providers: [MessageService, ConfirmationService],
   templateUrl: './worksites.component.html',
   styleUrls: ['./worksites.component.css'],
@@ -23,10 +34,16 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class WorksitesComponent {
   worksites: Worksite[] = [];
-  filteredWorksites: Worksite[] = [];
+  filteredWorks: Worksite[] = [];
   filterValue: string = '';
-  showFilterInput: boolean = false;
+  showFilterDialog: boolean = false;
   filterWorksiteForm!: FormGroup;
+
+  filterValues = {
+    name: '',
+    address: '',
+    city: '',
+  };
 
   constructor(
     private messageService: MessageService,
@@ -39,7 +56,7 @@ export class WorksitesComponent {
   ngOnInit() {
     this.worksiteService.getWorksites().subscribe((dataWorksites: any) => {
       this.worksites = dataWorksites.worksites;
-      this.filteredWorksites = this.worksites; // Initialize the filtered list
+      this.filteredWorks = [...this.worksites];
     });
 
     this.filterWorksiteForm = this.fb.group({
@@ -48,15 +65,39 @@ export class WorksitesComponent {
     });
   }
 
-  toggleFilterInput() {
-    this.showFilterInput = !this.showFilterInput;
+
+  applyFilters() {
+    this.filteredWorks = this.worksites.filter(worksite => {
+      const matchesName = this.filterValues.name
+        ? worksite.name.toLowerCase().includes(this.filterValues.name.toLowerCase())
+        : true;
+
+      const matchesAddress = this.filterValues.address
+        ? worksite.address.toString().includes(this.filterValues.address.toString())
+        : true;
+
+      const matchesCity = this.filterValues.city
+        ? worksite.city.toLowerCase().includes(this.filterValues.city.toLowerCase())
+        : true;
+
+      this.showFilterDialog = false;
+
+      return matchesName && matchesAddress && matchesCity;
+    });
   }
 
-  filterWorksites() {
-    const filter = this.filterValue.toLowerCase();
-    this.filteredWorksites = this.worksites.filter((worksite) =>
-      worksite.name.toLowerCase().includes(filter) || worksite.city.toLowerCase().includes(filter)
-    );
+  clearFilter() {
+    this.filterValues = {
+      name: '',
+      address: '',
+      city: ''
+    };
+
+    // Reset the filtered list to show all worksites again
+    this.filteredWorks = [...this.worksites];
+
+    // Close the filter dialog
+    this.showFilterDialog = false;
   }
 
   newWorksite() {
