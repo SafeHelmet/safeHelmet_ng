@@ -67,7 +67,7 @@ This script move files from the `docs` subfolder's `browser` in the correct posi
 ./move-to-docs.sh
 ```
 
-### Commit and push
+### Commit and push ONLY the build directory 
 
 Pushing to the main branch will trigger the github deploy action 
 ```bash
