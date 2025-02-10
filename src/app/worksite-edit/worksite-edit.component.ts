@@ -60,14 +60,19 @@ export class WorksiteEditComponent {
             address: [this.worksite.address, Validators.required],
             city: [this.worksite.city, Validators.required],
             state: [this.worksite.state, Validators.required],
-            zip: [this.worksite.zip, Validators.required],
+            zip_code: [this.worksite.zip_code, Validators.required],
             start_date_of_work: [this.worksite.start_date_of_work, Validators.required],
             end_date_of_work: [this.worksite.end_date_of_work, Validators.required],
+            temperature_threshold: [this.worksite.temperature_threshold, Validators.required],
+            humidity_threshold: [this.worksite.humidity_threshold, Validators.required],
+            brightness_threshold: [this.worksite.brightness_threshold, Validators.required],
+            posture_threshold: [this.worksite.posture_threshold, Validators.required],
+            max_g_threshold: [this.worksite.max_g_threshold, Validators.required],
             latitude: [this.worksite.latitude, Validators.required],
             longitude: [this.worksite.longitude, Validators.required]
           });
 
-          this.initializeMap();
+          
 
           
           

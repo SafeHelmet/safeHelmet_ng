@@ -32,7 +32,7 @@ export class WorkersComponent {
   filterValues = {
     name: '',
     surname: '',
-    fiscalcode: '',
+    fiscal_code: '',
   };
 
   constructor(
@@ -60,8 +60,8 @@ export class WorkersComponent {
         ? worker.surname.toString().includes(this.filterValues.surname.toString())
         : true;
 
-      const matchesFiscalCode = this.filterValues.fiscalcode
-        ? worker.fiscalcode.toLowerCase().includes(this.filterValues.fiscalcode.toLowerCase())
+      const matchesFiscalCode = this.filterValues.fiscal_code
+        ? worker.fiscal_code.toLowerCase().includes(this.filterValues.fiscal_code.toLowerCase())
         : true;
 
       this.showFilterDialog = false;
@@ -74,7 +74,7 @@ export class WorkersComponent {
     this.filterValues = {
       name: '',
       surname: '',
-      fiscalcode: ''
+      fiscal_code: ''
     };
 
     // Reset the filtered list to show all worksites again

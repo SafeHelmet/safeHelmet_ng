@@ -59,6 +59,11 @@ export class WorksiteNewComponent {
       zip: ['', Validators.required],
       start_date_of_work: ['', Validators.required],
       end_date_of_work: ['', Validators.required],
+      temperature_threshold: ['', Validators.required],
+      humidity_threshold: ['', Validators.required],
+      brightness_threshold: ['', Validators.required],
+      posture_threshold: ['', Validators.required],
+      max_g_threshold: [, Validators.required],
       latitude: [0, Validators.required],
       longitude: [0, Validators.required]
     });

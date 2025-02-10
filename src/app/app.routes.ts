@@ -15,7 +15,7 @@ import { WorksiteEditComponent } from './worksite-edit/worksite-edit.component';
 import { WorkersComponent } from './workers/workers.component';
 import { WorkerDetailComponent } from './worker-detail/worker-detail.component';
 import { WorkerEditComponent } from './worker-edit/worker-edit.component';
-
+import { authGuard } from './auth.guard'; // Import your guard
 
 export const routes: Routes = [
   {
@@ -28,31 +28,30 @@ export const routes: Routes = [
   },
   {
     path: 'dashboard',
-    loadComponent: () => import('./dashboard/dashboard.component').then(m => m.DashboardComponent)
+    loadComponent: () => import('./dashboard/dashboard.component').then(m => m.DashboardComponent),
+    canActivate: [authGuard] // Protect the dashboard route
   },
   {
     path: '',
     component: DashboardComponent,
     children: [
       { path: 'dashboard', component: DashboardComponent },
-      { path: 'worksites', component: WorksitesComponent },
-      { path: 'worksites/:id', component: WorksiteDetailComponent },
-      { path: 'worksite/new', component: WorksiteNewComponent },
-      { path: 'worksite/:id/edit', component: WorksiteEditComponent },
-      { path: 'readings', component: ReportsComponent },
-      { path: 'readings/:id', component: ReportDetailComponent },
-      { path: 'helmets', component: HelmetsComponent },
-      { path: 'helmet/new', component: HelmetNewComponent },
-      { path: 'workers', component: WorkersComponent },
-      { path: 'worker/new', component: WorkerNewComponent },
-      { path: 'worker/:id', component: WorkerDetailComponent },
-      { path: 'worker/:id/edit', component: WorkerEditComponent },
-      { path: 'anomalies', component: AnomaliesComponent },
-      { path: 'accounts', component: AccountsComponent },
-      { path: 'accounts/new', component: AccountNewComponent }
+      { path: 'worksites', component: WorksitesComponent, canActivate: [authGuard] },
+      { path: 'worksites/:id', component: WorksiteDetailComponent, canActivate: [authGuard] },
+      { path: 'worksite/new', component: WorksiteNewComponent, canActivate: [authGuard] },
+      { path: 'worksite/:id/edit', component: WorksiteEditComponent, canActivate: [authGuard] },
+      { path: 'readings', component: ReportsComponent, canActivate: [authGuard] },
+      { path: 'readings/:id', component: ReportDetailComponent, canActivate: [authGuard] },
+      { path: 'helmets', component: HelmetsComponent, canActivate: [authGuard] },
+      { path: 'helmet/new', component: HelmetNewComponent, canActivate: [authGuard] },
+      { path: 'workers', component: WorkersComponent, canActivate: [authGuard] },
+      { path: 'worker/new', component: WorkerNewComponent, canActivate: [authGuard] },
+      { path: 'worker/:id', component: WorkerDetailComponent, canActivate: [authGuard] },
+      { path: 'worker/:id/edit', component: WorkerEditComponent, canActivate: [authGuard] },
+      { path: 'anomalies', component: AnomaliesComponent, canActivate: [authGuard] },
+      { path: 'accounts', component: AccountsComponent, canActivate: [authGuard] },
+      { path: 'accounts/new', component: AccountNewComponent, canActivate: [authGuard] }
     ]
   },
-
-  // Catch-all
   { path: '**', redirectTo: '' }
 ];

@@ -16,17 +16,39 @@
         </div>
     </ng-template>
 </p-confirmPopup>
-<p-button (click)="confirm()" label="Filter" class="filterButt" />
+
+<div class="row">
+    <p-button (click)="showFilterDialog = true" label="Filter" class="filterButt"></p-button>
+</div>
+
+<p-dialog header="Filter options" [(visible)]="showFilterDialog" [modal]="true" [closable]="true" [draggable]="false"
+    [resizable]="true" [style]="{ width: '50vw' }"  >
+    <div class="p-fluid">
+        <div class="p-field rowForm">
+            <label for="read_at">Read date:</label>
+            <input pInputText id="read_at" [(ngModel)]="filterValues.read_at" placeholder="Enter date as dd/mm/yyyy" />
+        </div>
+    </div>
+    <br>
+
+    <div class="dialog-footer">
+        <button pButton type="button" label="Apply" icon="pi pi-check" class="p-button-success"
+            (click)="applyFilters()"></button>
+        <button pButton type="button" label="Reset" icon="pi pi-times" class="p-button-secondary margin-left"
+            (click)="clearFilter()"></button>
+    </div>
+</p-dialog>
+
 
 <br>
 
-<p-table [value]="readings" [paginator]="true" [rows]="10" dataKey="id" editMode="row"
+<p-table [value]="filteredReadings" [paginator]="true" [rows]="10" dataKey="id" editMode="row"
     [tableStyle]="{'min-width': '50rem'}" class="tableColor">
     <ng-template #header>
         <tr class="tableHeader">
             <th style="width:10%">Code</th>
-            <th style="width:20%">Worker</th>
-            <th style="width:20%">Sensor 1</th>
+            <th style="width:20%">Helmet</th>
+            <th style="width:20%">Temperature</th>
             <th style="width:20%">Read at</th>
             <th style="width:10%">Anomalous</th>
             <th style="width:5%"></th>
@@ -50,10 +72,10 @@
             <td>
                 <p-cellEditor>
                     <ng-template #input>
-                        <input pInputText type="text" [(ngModel)]="reading.sensor1" />
+                        <input pInputText type="text" [(ngModel)]="reading.temperature" />
                     </ng-template>
                     <ng-template #output>
-                        {{reading.sensor1}}
+                        {{reading.temperature}}°C
                     </ng-template>
                 </p-cellEditor>
             </td>
@@ -63,17 +85,20 @@
                         <input pInputText type="text" [(ngModel)]="reading.read_at" />
                     </ng-template>
                     <ng-template #output>
-                        {{reading.read_at}}
+                        {{reading.read_at | date:'dd/MM/yyyy HH:mm:ss'}}
                     </ng-template>
                 </p-cellEditor>
             </td>
             <td>
                 <p-cellEditor>
                     <ng-template #input>
-                        <input pInputText type="text" [(ngModel)]="reading.anomalous" />
+                        <input pInputText type="text" [(ngModel)]="reading.anomaly" />
                     </ng-template>
                     <ng-template #output>
-                        {{reading.anomalous}}
+                        <span [ngStyle]="{'color': reading.anomaly ? 'red' : 'inherit'}">
+                            {{reading.anomaly}}
+                            <i *ngIf="reading.anomaly" class="pi pi-exclamation-triangle" style="margin-left: 5px;"></i>
+                        </span>
                     </ng-template>
                 </p-cellEditor>
             </td>

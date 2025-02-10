@@ -8,6 +8,7 @@ import { WorksiteService } from '../services/worksite.service';
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import { Worksite } from '../models/worksite';
+import { Worker } from '../models/worker';
 
 @Component({
   selector: 'app-report-detail',
@@ -24,6 +25,7 @@ export class ReportDetailComponent {
   surname: string | null = null;
   worksitename: string | null = null;
   worksite: Worksite | null = null;
+  worker: Worker | null = null;
 
 
 
@@ -35,12 +37,15 @@ export class ReportDetailComponent {
         this.readingId = id;
         this.readingService.getReadingsById(id).subscribe(reading => {
           this.reading = reading;
-          console.log(this.reading?.read_at);
-          console.log(typeof this.reading?.read_at);
+          if (this.reading) {
+            this.readingService.getReadingWorker(id).subscribe(worker => {
+              this.worker = worker;
+            });
+            this.readingService.getReadingWorkiste(id).subscribe(worksite => {
+              this.worksite = worksite;
+            });
+          }
         });
-        if (this.reading){
-          //this.workisteService.getWorksiteById(this.reading.)
-        }
         
       }
     });
@@ -102,10 +107,10 @@ export class ReportDetailComponent {
     doc.setFontSize(12);
     doc.text(`Reading ID: ${this.readingId ?? 'N/A'}`, 10, 50);
     doc.text(`Reading Date: ${formattedReadAt}`, 10, 60);
-    doc.text(`Worker name: ${this.name ?? 'N/A'}`, 10, 70);
-    doc.text(`Worker surname: ${this.surname ?? 'N/A'}`, 10, 80);
+    doc.text(`Worker name: ${this.worker?.name ?? 'N/A'}`, 10, 70);
+    doc.text(`Worker surname: ${this.worker?.surname ?? 'N/A'}`, 10, 80);
     doc.text(
-      `Worksite Name: ${this.worksitename ?? 'N/A'}`,
+      `Worksite location: ${this.worksite?.address ?? 'N/A'} ${this.worksite?.city ?? 'N/A'}, ${this.worksite?.state ?? 'N/A'}`,
       10,
       90
     );
@@ -122,19 +127,43 @@ export class ReportDetailComponent {
       doc.setTextColor(0, 0, 0); // Reset text color to black
     }
 
+    if (! this.reading ){
+      console.log("No reading associate, ERROR");
+      return;
+    }
+
     // Example Table Data
-    const headers = [['Sensor 1', 'Sensor 2', 'Sensor 3']];
-    const data = [
-      ['Value 1', 'Value 2', 'Value 3'],
-      ['Another 1', 'Another 2', 'Another 3'],
+    const rows = [
+      ["Temperature", `${this.reading.temperature} °C / ${this.worksite?.temperature_threshold} °C`], 
+      ["Humidity", `${this.reading.humidity} % / ${this.worksite?.humidity_threshold} %`],       
+      ["Brightness", `${this.reading.brightness} lumen / ${this.worksite?.brightness_threshold} lumen `],  
+      ["Methane Detected", this.reading.methane ? "Yes" : "No"],
+      ["Carbon Monoxide Detected", this.reading.carbon_monoxide ? "Yes" : "No"],
+      ["Smoke Detected", this.reading.smoke_detection ? "Yes" : "No"],
+      ["Welding Protection Used", this.reading.uses_welding_protection ? "Yes" : "No"],
+      ["Gas Protection Used", this.reading.uses_gas_protection ? "Yes" : "No"],
+      ["Incorrect Posture", this.reading.incorrect_posture.toString()],
+      ["Anomaly Detected", this.reading.anomaly ? "Yes" : "No"],
     ];
+
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(16);
+    doc.text("Helmet Readings", 10, 110);
 
     // Add Table
     autoTable(doc, {
-      head: headers,
-      body: data,
-      startY: 110, // Adjust startY to fit below other content
-      styles: { halign: 'center' },
+      head: [["Property", "Value / Threshold"]],
+      body: rows,
+      startY: 120,
+      styles: {
+        font: "helvetica",
+        fontSize: 12,
+        halign: "left",
+      },
+      columnStyles: {
+        0: { fontStyle: "bold" }, // Left column in bold
+        1: { fontStyle: "normal" }, // Right column normal
+      },
     });
 
     // Open the PDF in a new tab
@@ -145,10 +174,5 @@ export class ReportDetailComponent {
     console.log('PDF Generated');
   }
 
-  ngOnInit() {
-    this.name = "Prova nome";
-    this.surname = "Prova cognome";
-    this.worksitename = "Prova worksitename cliccabile e porta al detail del worksite";
-  }
 
 }

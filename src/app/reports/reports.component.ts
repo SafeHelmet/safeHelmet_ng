@@ -10,12 +10,15 @@ import { ConfirmPopupModule } from 'primeng/confirmpopup';
 import { TableModule } from 'primeng/table';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { DialogModule } from 'primeng/dialog';
+import { InputTextModule } from 'primeng/inputtext';
+import { DatePickerModule } from 'primeng/datepicker'; 
 
 
 @Component({
   selector: 'app-reports',
   standalone: true,
-  imports: [RouterLink, ButtonModule, ToastModule, ConfirmPopupModule, TableModule, CommonModule, FormsModule],
+  imports: [RouterLink, ButtonModule, ToastModule, ConfirmPopupModule, TableModule, CommonModule, FormsModule, DialogModule, InputTextModule, DatePickerModule],
   providers: [MessageService, ConfirmationService],
   templateUrl: './reports.component.html',
   styleUrl: './reports.component.css',
@@ -23,24 +26,22 @@ import { FormsModule } from '@angular/forms';
 })
 export class ReportsComponent {
 
+  filteredReadings: Reading [] = [];
+  showFilterDialog: boolean = false;
+
+  filterValues = {
+    read_at: '',
+  };
+
   constructor(private messageService: MessageService, private confirmationService: ConfirmationService, private router: Router, private readingService: ReadingService) {}
 
-  confirm() {
-    console.log("backshot");
-    this.confirmationService.confirm({
-      message: 'Are you sure you want to proceed?',
-      accept: () => {
-        console.log('Confirmed');
-        this.messageService.add({ severity: 'warn', summary: 'Action', detail: 'Worksite saved!' });
-      }
-    });
-  }
 
   readings: Reading[] = [];
 
   ngOnInit() {
     this.readingService.getReadings().subscribe((dataReadings: Reading[]) => {
       this.readings=dataReadings;
+      this.filteredReadings = [...this.readings];
     });
   }
 
@@ -48,8 +49,46 @@ export class ReportsComponent {
     console.log('new');
   }
 
-  clickBtn() {
-    console.log("gfdsasdfg");
+  formatDateToISO(dateString: string): string {
+    const [day, month, year] = dateString.split('/').map((part) => parseInt(part, 10));
+    const date = new Date(year, month - 1, day + 1); // Months are zero-based in JavaScript Date
+    return date.toISOString().split('T')[0]; 
+  }
+
+
+
+  applyFilters() {
+    const filterDate = this.filterValues.read_at
+      ? this.formatDateToISO(this.filterValues.read_at)
+      : null;
+
+    console.log('Filter Date:', filterDate);
+
+    if (filterDate) {
+      this.filteredReadings = this.readings.filter((reading) => {
+        if (!reading.read_at) {
+          return false; // Skip readings with undefined `read_at`
+        }
+        // Convert the reading's date to ISO format (yyyy-MM-dd)
+        const readingDate = new Date(reading.read_at).toISOString().split('T')[0];
+        console.log('Reading Date:', readingDate);
+        return readingDate === filterDate;
+      });
+    } else {
+      this.filteredReadings = [...this.readings]; // Reset if no date is provided
+    }
+
+    this.showFilterDialog = false; 
+  }
+
+
+  clearFilter() {
+    this.filterValues = {
+      read_at: ''
+    };
+
+    this.filteredReadings = [...this.readings];
+    this.showFilterDialog = false;
   }
 
 

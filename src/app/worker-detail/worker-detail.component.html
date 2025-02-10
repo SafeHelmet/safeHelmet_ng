@@ -3,7 +3,6 @@
         <h2>Detail</h2>
     </div>
     <div class="column">
-        <p-button (click)="addHelmet()" icon="pi pi-plus" class="float-right margin-right" label="Add helmet" />
         <p-button (click)="edit()" icon="pi pi-pencil" class="float-right margin-right" label="Edit" />
         <p-button (click)="back()" icon="pi pi-angle-left" class="float-right margin-right" label="Back" />
     </div>
@@ -14,6 +13,9 @@
     </div>
     <div class="detail-item" *ngIf="worker">
         <strong>Surname:</strong> {{worker.surname}}
+    </div>
+    <div class="detail-item" *ngIf="worker">
+        <strong>Fiscal code:</strong> {{worker.fiscal_code}}
     </div>
     <div class="detail-item" *ngIf="worker">
         <strong>Email:</strong> {{worker.email}}

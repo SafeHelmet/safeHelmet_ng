@@ -51,6 +51,11 @@ export class WorksiteService {
     return this.http.get(RESOLVE_ENV.API.ROUTES.WORKSITE.GET_WORKERS(id), { headers });
   }
 
+  getReadings(id: string): Observable<any> {
+    const headers = new HttpHeaders().set('Authorization', ENVIRONMENT.AUTH_TOKEN);
+    return this.http.get(RESOLVE_ENV.API.ROUTES.WORKSITE.GET_READINGS(id), { headers });
+  }
+
   getHelmets(): Observable<any> {
     const headers = new HttpHeaders().set('Authorization', ENVIRONMENT.AUTH_TOKEN);
     return this.http.get(RESOLVE_ENV.API.ROUTES.HELMETS.BASE, { headers });

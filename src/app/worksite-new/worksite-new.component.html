@@ -42,6 +42,26 @@
                 dateFormat="dd/mm/yy" [showTime]="true" [hourFormat]="'24'" />
         </div>
         <div class="rowForm">
+            <label for="temperature_threshold">Temperature threshold:</label>
+            <input id="temperature_threshold" type="text" pInputText formControlName="temperature_threshold" />
+        </div>
+        <div class="rowForm">
+            <label for="humidity_threshold">Humidity threshold:</label>
+            <input id="humidity_threshold" type="text" pInputText formControlName="humidity_threshold" />
+        </div>
+        <div class="rowForm">
+            <label for="brightness_threshold">Brightness threshold:</label>
+            <input id="brightness_threshold" type="text" pInputText formControlName="brightness_threshold" />
+        </div>
+        <div class="rowForm">
+            <label for="posture_threshold">Posture threshold:</label>
+            <input id="posture_threshold" type="text" pInputText formControlName="posture_threshold" />
+        </div>
+        <div class="rowForm">
+            <label for="max_g_threshold">Max g threshold:</label>
+            <input id="max_g_threshold" type="text" pInputText formControlName="max_g_threshold" />
+        </div>
+        <div class="rowForm">
             <label for="latitude">Latitude:</label>
             <input id="latitude" type="text" pInputText formControlName="latitude" [(ngModel)]="latitude" readonly />
         </div>

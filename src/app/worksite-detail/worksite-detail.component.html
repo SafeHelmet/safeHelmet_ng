@@ -5,9 +5,40 @@
     <div class="column">
         <p-button (click)="newWorker()" icon="pi pi-users" class="float-right margin-right" label="Add Worker" />
         <p-button (click)="editWorker()" icon="pi pi-pencil" class="float-right margin-right" label="Edit" />
+        <p-button (click)="showWeatherDialog = true" icon="pi pi-sun" class="float-right margin-right" label="Weather" />
         <p-button (click)="back()" icon="pi pi-angle-left" class="float-right margin-right" label="Back" />
     </div>
 </div>
+
+<p-dialog header="What's the Weather" [modal]="true" [(visible)]="showWeatherDialog" [style]="{ width: '40rem' }">
+    <div class="weather-dialog">
+    
+        <div class="temperature-section">
+            <div class="temp-display">
+                <p class="temp-value" (click)="toggleTemperatureUnit()">{{weather?.temp || 'No data'}} °{{ isCelsius ? 'C' : 'F' }}</p>
+            </div>
+        </div>
+    
+        <div class="weather-details">
+            <div class="details-left">
+                <p>PM10: <span>{{ weather?.pm10 || 'No data' }}</span></p>
+                <p>CO2: <span>{{ weather?.c0 || 'No data' }}</span></p>
+            </div>
+            <div class="details-right">
+                <p>Temp Max: <span>{{ weather?.temp_max || 'No data' }}°{{ isCelsius ? 'C' : 'F' }}</span></p>
+                <p>Temp Min: <span>{{ weather?.temp_min || 'No data' }}°{{ isCelsius ? 'C' : 'F' }}</span></p>
+                <p>Humidity: <span>{{ weather?.humidity || 'No data' }}%</span></p>
+            </div>
+        </div>
+    
+        <p class="last-update">Last update: <span>{{ weather?.created_at | date:'dd/MM/yyyy HH:mm:ss' }}</span></p>
+        <div class="refresh-section">
+            <p-button label="" (click)="refreshWeather()" icon="pi pi-refresh"></p-button>
+        </div>
+    </div>
+
+    
+</p-dialog>
 
 <div class="details-container">
     <div class="detail-item" *ngIf="worksite">
@@ -20,10 +51,10 @@
         <strong>Worksite Longitude:</strong> {{worksite.longitude}}
     </div>
     <div class="detail-item" *ngIf="worksite">
-        <strong>Worksite start_date_of_work:</strong> {{worksite.start_date_of_work}}
+        <strong>Worksite start date of work:</strong> {{worksite?.start_date_of_work | date:'dd/MM/yyyy HH:mm:ss'}}
     </div>
     <div class="detail-item" *ngIf="worksite">
-        <strong>Worksite end_date_of_work:</strong> {{worksite.end_date_of_work}}
+        <strong>Worksite end date of work:</strong> {{worksite?.end_date_of_work | date:'dd/MM/yyyy HH:mm:ss'}}
     </div>
     <div class="detail-item" *ngIf="worksite">
         <strong>Worksite address:</strong> {{worksite.address}}
@@ -35,8 +66,26 @@
         <strong>Worksite state:</strong> {{worksite.state}}
     </div>
     <div class="detail-item" *ngIf="worksite">
-        <strong>Worksite zip:</strong> {{worksite.zip}}
+        <strong>Worksite zip:</strong> {{worksite.zip_code}}
     </div>
+    <div class="detail-item" *ngIf="worksite">
+        <strong>Worksite temperature threshold:</strong> {{worksite.temperature_threshold}}
+    </div>
+    <div class="detail-item" *ngIf="worksite">
+        <strong>Worksite humidity threshold:</strong> {{worksite.humidity_threshold}}
+    </div>
+    <div class="detail-item" *ngIf="worksite">
+        <strong>Worksite brightness threshold:</strong> {{worksite.brightness_threshold}}
+    </div>
+    <div class="detail-item" *ngIf="worksite">
+        <strong>Worksite posture threshold:</strong> {{worksite.posture_threshold}}
+    </div>
+    <div class="detail-item" *ngIf="worksite">
+        <strong>Worksite max g threshold:</strong> {{worksite.max_g_threshold}}
+    </div>
+
+
+
 </div>
 <!-- <div class="details-container">
     <div *ngIf="weather">
@@ -73,7 +122,6 @@
                                 <th style="width:20%">Name</th>
                                 <th style="width:20%">Surname</th>
                                 <th style="width:5%"></th>
-                                <th style="width:5%"></th>
                             </tr>
                         </ng-template>
                         <ng-template #body let-worker let-ri="rowIndex">
@@ -82,29 +130,49 @@
                                     {{worker.id}}
                                 </td>
                                 <td>
-                                        <ng-template #output>
                                             {{worker.name}}
-                                        </ng-template>
                                 </td>
                                 <td>
-                                        <ng-template #output>
                                             {{worker.surname}}
-                                        </ng-template>
                                 </td>
                                 <td>
-                                    <p-button icon="pi pi-info" text rounded severity="secondary"
+                                    <p-button icon="pi pi-info" text rounded severity="secondary" [routerLink]="['/worker', worker.id]"
                                          />
                                 </td>
-                                <td>
-                                    <p-button icon="pi pi-trash" text rounded severity="secondary" />
-                                </td>
+                                
                             </tr>
                         </ng-template>
                     </p-table>
                 </p>
             </p-tabpanel>
             <p-tabpanel value="1">
-                <p>Readings</p>
+                <p-table [value]="readings" [paginator]="true" [rows]="10" dataKey="id" editMode="row"
+                    [tableStyle]="{'min-width': '50rem'}" class="tableColor">
+                    <ng-template #header>
+                        <tr class="tableHeader">
+                            <th style="width:10%">Code</th>
+                            <th style="width:20%">Read at</th>
+                            <th style="width:20%">Anomalous</th>
+                            <th style="width:5%"></th>
+                        </tr>
+                    </ng-template>
+                    <ng-template #body let-reading let-ri="rowIndex">
+                        <tr class="tableRow">
+                            <td>
+                                {{reading.id}}
+                            </td>
+                            <td>
+                                {{reading.read_at | date:'dd/MM/yyyy HH:mm:ss'}}
+                            </td>
+                            <td>
+                                {{reading.anomaly}}
+                            </td>
+                            <td>
+                                <p-button icon="pi pi-info" text rounded severity="secondary" [routerLink]="['/readings', reading.id]" />
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
             </p-tabpanel>
         </p-tabpanels>
     </p-tabs>

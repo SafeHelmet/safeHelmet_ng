@@ -34,23 +34,15 @@
     --p-menubar-item-focus-background: #34d399;
 }
 
-.logout-button {
-    margin-left: 10px;
-    margin-bottom: 10px;
-    cursor: pointer;
-    color: black;
-    /* Ensure text is visible */
-    background-color: transparent;
-}
+
 
 
 
 .top-logo {
-    width: 25%;
+    width: 15%;
     /* Adjust as needed */
     height: auto;
-    margin-left: 25px;
-    margin-top: 10px;
+    
 }
 
 /* Sidebar */
@@ -360,12 +352,12 @@
     float: left;
 }
 
-/* Clear floats after the columns */
-.rowNav:after {
-    content: "";
-    display: table;
-    clear: both;
+.logout-padding {
+    padding-left: 100px;
 }
+
+/* Clear floats after the columns */
+
 
 .float-rightNav {
     float: right;
@@ -376,4 +368,63 @@
     padding-right: 40px !important;
     font-size: 18px;
 
+}
+
+/* Row container in the top-navbar */
+.rowNav {
+    display: flex;
+    justify-content: space-between;
+    /* Aligns items to the ends */
+    align-items: center;
+    /* Center items vertically */
+    height: 100%;
+    padding: 0 1rem;
+    /* Adds padding for spacing */
+}
+
+/* Ensure logo and button containers share space properly */
+.logo-container {
+    flex-grow: 1;
+    /* Allows the logo container to take up available space */
+}
+
+.button-container {
+    flex-shrink: 0;
+    /* Ensures the button doesn't shrink */
+}
+
+/* Style for the logout button */
+.logout-button {
+    margin-right: 10px;
+    /* Adjust spacing from the edge */
+    padding: 0.5rem 1rem;
+    /* Padding for better touch targets */
+    
+    /* Green background */
+    color: white;
+    /* White text */
+    border-radius: 4px;
+    /* Rounded corners */
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    /* Smooth hover effect */
+}
+
+
+
+/* Responsive behavior */
+@media (max-width: 768px) {
+    .logout-button {
+        font-size: 14px;
+        /* Smaller font for smaller screens */
+        padding: 0.4rem 0.8rem;
+        /* Adjust padding */
+    }
+}
+
+@media (max-width: 480px) {
+    .logout-button {
+        font-size: 12px;
+        padding: 0.3rem 0.6rem;
+    }
 }

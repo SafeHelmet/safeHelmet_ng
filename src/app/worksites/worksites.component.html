@@ -88,7 +88,6 @@
             <th style="width:10%">State</th>
             <th style="width:10%">Zip</th>
             <th style="width:5%"></th>
-            <th style="width:5%"></th>
         </tr>
     </ng-template>
     <ng-template #body let-worksite let-editing="editing" let-ri="rowIndex">
@@ -140,23 +139,13 @@
                         <input pInputText type="text" [(ngModel)]="worksite.zip" />
                     </ng-template>
                     <ng-template #output>
-                        {{ worksite.zip }}
+                        {{ worksite.zip_code }}
                     </ng-template>
                 </p-cellEditor>
             </td>
             <td>
                 <p-button icon="pi pi-info" text rounded severity="secondary"
                     [routerLink]="['/worksites', worksite.id]"></p-button>
-            </td>
-            <td>
-                <div class="flex items-center justify-center gap-1">
-                    <button *ngIf="!editing" pButton pRipple type="button" pInitEditableRow icon="pi pi-pencil"
-                        (click)="onRowEditInit(worksite)" text rounded severity="secondary"></button>
-                    <button *ngIf="editing" pButton pRipple type="button" pSaveEditableRow icon="pi pi-check"
-                        (click)="onRowEditSave(worksite)" text rounded severity="secondary"></button>
-                    <button *ngIf="editing" pButton pRipple type="button" pCancelEditableRow icon="pi pi-times"
-                        (click)="onRowEditCancel(worksite, ri)" text rounded severity="secondary"></button>
-                </div>
             </td>
         </tr>
     </ng-template>

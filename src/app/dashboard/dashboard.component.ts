@@ -4,10 +4,10 @@ import { Avatar } from 'primeng/avatar';
 import { Badge } from 'primeng/badge';
 import { MenuItem } from 'primeng/api';
 import { Menu } from 'primeng/menu';
-import { TestServiceService } from '../services/test-service.service';
 import { Router, RouterOutlet } from '@angular/router';
 import { RouterLink } from '@angular/router';
 import { Button } from 'primeng/button';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -28,7 +28,7 @@ import { Button } from 'primeng/button';
 export class DashboardComponent {
 
 
-  constructor(private testService: TestServiceService, private router: Router) { }
+  constructor(private router: Router, private authService: AuthService) { }
   topItems = [
     {
       
@@ -40,8 +40,7 @@ export class DashboardComponent {
       label: 'Worksites',
       icon: 'pi pi-building',
       routerLink: ['/worksites'],
-      style: { color: 'black' },
-      command: () => this.test()
+      style: { color: 'black' }
     },
     {
       label: 'Workers',
@@ -66,29 +65,17 @@ export class DashboardComponent {
       icon: 'pi pi-bell',
       routerLink: ['/anomalies'],
       style: { color: 'black' }
-    },
-    {
-      label: 'Accounts',
-      icon: 'pi pi-user',
-      routerLink: ['/accounts'],
-      style: { color: 'black' }
     }
   ];
 
   logout() {
     console.log('Logout');
+    this.authService.logout();
   }
 
-  test() {
-    this.testService.getTest().subscribe({
-      next: (data) => console.log('Response:', data),
-      error: (err) => console.error('Error:', err)
-    });
-  }
+  
 
-  back() {
-    this.router.navigate(['/dashboard']);
-  }
+  
 
 
 }

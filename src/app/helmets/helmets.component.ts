@@ -39,6 +39,8 @@ export class HelmetsComponent {
   ngOnInit() {
     this.worksiteService.getHelmets().subscribe((dataHelmets: Helmet[]) => {
       this.helmets = dataHelmets;
+      console.log(this.helmets);
+
     });
   }
 

@@ -61,3 +61,7 @@ p-paginator {
     --p-datatable-header-cell-background: #f1f1f1;
     --p-datatable-header-cell-color: #000;
 }
+
+div.filterButt {
+    margin-bottom: 10px;
+}

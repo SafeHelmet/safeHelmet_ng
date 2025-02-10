@@ -9,6 +9,8 @@ import { HttpClient } from '@angular/common/http';
 import { MessageModule } from 'primeng/message';
 import { InputGroup } from 'primeng/inputgroup';
 import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
+import { AuthService } from '../services/auth.service';
+
 /*import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http'; */
 
 import { RESOLVE_ENV } from '../../environments/environment';
@@ -41,66 +43,18 @@ export class LoginComponent {
 
   constructor(
     private router: Router,
-    private http: HttpClient
+    private http: HttpClient,
+    private authService: AuthService
   ) {}
 
   onClick() {
     this.msg = 'Welcome ';
   }
 
-  onLogin() {
-    this.router.navigate(['/worksites']);
-    if (!this.username || !this.password) {
-      this.errorMessage = 'Please fill in both fields.';
-      return;
+  onLogin(): void {
+    if (this.authService.login(this.username, this.password)) {
+      this.router.navigate(['/worksites']);
+      this.errorMessage = 'Invalid credentials';
     }
-
-    const loginUrl = `${RESOLVE_ENV.API.BASE_URL}/login`;
-    this.loading = true;
-    
-    const credentials = {
-      username: this.username,
-      password: this.password
-    };
-
-    console.log(credentials);
-
-    /* this.http.post(loginUrl, { username: this.username, password: this.password }).subscribe({
-      next: (response: any) => {
-        this.loading = false;
-
-        // Store token or user data if needed
-        localStorage.setItem('token', response.token);
-
-        this.router.navigate(['/worksites']);
-      },
-      error: (error) => {
-        this.loading = false;
-        this.errorMessage = error.error.message || 'Login failed. Please try again.';
-      },
-    }); */
-
-
-    // Use POST method to send credentials
-    /*this.http.post(`${environment.apiUrl}/auth/login`, credentials, {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json'
-      })
-    }).subscribe({
-      next: (response: any) => {
-        // Handle successful login
-        // For example, store the token in localStorage
-        localStorage.setItem('token', response.token);
-        this.router.navigate(['/dashboard']);
-      },
-      error: (error) => {
-        this.loading = false;
-        // Handle login error
-        console.error('Login failed:', error);
-      },
-      complete: () => {
-        this.loading = false;
-      }
-    }); */
   }
 }

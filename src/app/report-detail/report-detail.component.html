@@ -12,28 +12,73 @@
         <strong>Reading ID:</strong> {{reading.id}}
     </div>
     <div class="detail-item" *ngIf="reading">
-        <strong>Worker:</strong> {{name}} {{surname}}
+        <strong>Worker:</strong> {{worker?.name}} {{worker?.surname}}
     </div>
     <div class="detail-item" *ngIf="reading">
-        <strong>Worksite:</strong> {{worksitename}}
+        <strong>Worksite location:</strong> {{worksite?.address}}, {{worksite?.city}}, {{worksite?.state}}
     </div>
     <div class="detail-item" *ngIf="reading">
-        <strong>Read At:</strong> {{reading.read_at}}
+        <strong>Read At:</strong> {{reading.read_at | date:'dd/MM/yyyy HH:mm:ss'}}
     </div>
     <div class="detail-item" *ngIf="reading">
-        <strong>Sensor 1:</strong> {{reading.sensor1}}
+        <strong>Temperature:</strong> {{reading.temperature}}
     </div>
     <div class="detail-item" *ngIf="reading">
-        <strong>Sensor 2:</strong> {{reading.sensor2}}
+        <strong>Humidity:</strong> {{reading.humidity}}
     </div>
     <div class="detail-item" *ngIf="reading">
-        <strong>Sensor 3:</strong> {{reading.sensor3}}
+        <strong>Brightness:</strong> {{reading.brightness}}
+    </div>
+    <div class="detail-item" *ngIf="reading">
+        <strong>Methane:</strong> {{reading.methane}}
+    </div>
+    <div class="detail-item" *ngIf="reading">
+        <strong>Carbon Monoxide:</strong> {{reading.carbon_monoxide}}
+    </div>
+    <div class="detail-item" *ngIf="reading">
+        <strong>Smoke detection:</strong> {{reading.smoke_detection}}
+    </div>
+    <div class="detail-item" *ngIf="reading">
+        <strong>Uses welding protection:</strong> {{reading.uses_welding_protection}}
+    </div>
+    <div class="detail-item" *ngIf="reading">
+        <strong>Uses gas protection:</strong> {{reading.uses_gas_protection}}
+    </div>
+    <div class="detail-item" *ngIf="reading">
+        <strong>Average X:</strong> {{reading.avg_X}}
+    </div>
+    <div class="detail-item" *ngIf="reading">
+        <strong>Average Y:</strong> {{reading.avg_Y}}
+    </div>
+    <div class="detail-item" *ngIf="reading">
+        <strong>Average Z:</strong> {{reading.avg_Z}}
+    </div>
+    <div class="detail-item" *ngIf="reading">
+        <strong>Average G:</strong> {{reading.avg_G}}
+    </div>
+    <div class="detail-item" *ngIf="reading">
+        <strong>Standard X:</strong> {{reading.std_X}}
+    </div>
+    <div class="detail-item" *ngIf="reading">
+        <strong>Standard Y:</strong> {{reading.std_Y}}
+    </div>
+    <div class="detail-item" *ngIf="reading">
+        <strong>Standard Z:</strong> {{reading.std_Z}}
+    </div>
+    <div class="detail-item" *ngIf="reading">
+        <strong>Standard G:</strong> {{reading.std_G}}
+    </div>
+    <div class="detail-item" *ngIf="reading">
+        <strong>Max G:</strong> {{reading.max_G}}
+    </div>
+    <div class="detail-item" *ngIf="reading">
+        <strong>Incorrect posture:</strong> {{reading.incorrect_posture}}
     </div>
     <div class="detail-item anomalous" *ngIf="reading">
         <strong>Anomalous:</strong>
-        <span [ngStyle]="{'color': reading.anomalous ? 'red' : 'inherit'}">
-            {{reading.anomalous}}
-            <i *ngIf="reading.anomalous" class="pi pi-exclamation-triangle" style="margin-left: 5px;"></i>
+        <span [ngStyle]="{'color': reading.anomaly ? 'red' : 'inherit'}">
+            {{reading.anomaly}}
+            <i *ngIf="reading.anomaly" class="pi pi-exclamation-triangle" style="margin-left: 5px;"></i>
         </span>
     </div>
 </div>

@@ -20,8 +20,8 @@
             <input pInputText id="surname" [(ngModel)]="filterValues.surname" placeholder="Enter surname" />
         </div>
         <div class="p-field rowForm">
-            <label for="fiscalcode">Fiscal code:</label>
-            <input pInputText id="fiscalcode" [(ngModel)]="filterValues.fiscalcode" placeholder="Enter fiscalcode" />
+            <label for="fiscal_code">Fiscal code:</label>
+            <input pInputText id="fiscal_code" [(ngModel)]="filterValues.fiscal_code" placeholder="Enter fiscal code" />
         </div>
     </div>
     <br>
@@ -74,7 +74,7 @@
                 {{ worker.surname }}
             </td>
             <td>
-                {{ worker.fiscalcode }}
+                {{ worker.fiscal_code }}
             </td>
             <td>
                 <p-button icon="pi pi-info" text rounded severity="secondary"

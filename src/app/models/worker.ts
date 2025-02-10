@@ -2,10 +2,11 @@ export interface Worker {
     id?: number;
     name: string;
     surname: string;
-    fiscalcode: string;
+    fiscal_code: string;
     email: string;
+    password: string;
     phone: string;
     active: boolean;
-    createdAt?: Date;
-    updatedAt?: Date;
+    created_at?: Date;
+    updated_at?: Date;
 } 
