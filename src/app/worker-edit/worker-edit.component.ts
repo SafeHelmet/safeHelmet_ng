@@ -40,7 +40,8 @@ export class WorkerEditComponent {
 
   @ViewChild('confirmDialog') confirmDialog: any;
 
-  constructor(private route: ActivatedRoute, 
+  constructor(
+    private route: ActivatedRoute, 
     private worksiteService: WorksiteService, 
     private router: Router, private fb: FormBuilder, 
     private messageService: MessageService, 
@@ -64,7 +65,8 @@ export class WorkerEditComponent {
             name: [this.worker.name, Validators.required],
             surname: [this.worker.surname, Validators.required],
             email: [this.worker.email, Validators.required],
-            phone: [this.worker.phone, Validators.required]
+            phone: [this.worker.phone, Validators.required],
+            fiscal_code: [this.worker.fiscal_code, Validators.required]
           });
 
         });
@@ -78,7 +80,17 @@ export class WorkerEditComponent {
   }
 
   confirmDelete() {
-    this.confirmDialog.visible = true;
+    this.confirmationService.confirm({
+      message: 'Are you sure you want to delete this worker?',
+      header: 'Confirm',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.onConfirmDelete(); 
+      },
+      reject: () => {
+        this.onRejectDelete();
+      }
+    });
   }
 
   onConfirmDelete() {
@@ -86,7 +98,7 @@ export class WorkerEditComponent {
       this.worksiteService.deleteWorker(this.workerId).subscribe({
         next: () => {
           this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Worker deleted successfully!' });
-          this.router.navigate(['/workers']); // Redirect to workers list
+          this.router.navigate(['/workers']);
         },
         error: (err) => {
           console.error(err);
@@ -111,14 +123,14 @@ export class WorkerEditComponent {
       const workerData = this.workerForm.value;
       this.worksiteService.editWorkerById(this.workerId, workerData).subscribe({
         next: (response) => {
-          this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Worker added successfully!' });
+          this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Worker updated successfully!' });
           setTimeout(() => {
             this.router.navigate(['/worker/' + this.workerId]);
           }, 1000);
         },
         error: (err) => {
           console.error(err);
-          this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Failed to add worker' });
+          this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Failed to update worker' });
         }
       });
     } else {

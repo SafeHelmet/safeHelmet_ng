@@ -1,0 +1,247 @@
+
+<div class="row">
+    <div class="column">
+        <h2>Quick New Attendance</h2>
+    </div>
+    <div class="column">
+        <p-button (click)="back()" icon="pi pi-angle-left" class="float-right margin-right" label="Back" />
+    </div>
+</div>
+
+<p-toast />
+
+<div class="form-container">
+    <form [formGroup]="workerAttendanceForm" (ngSubmit)="addQuickAttendance()">
+        <div class="rowForm">
+            <label for="worker_name">Worker:</label>
+            <input id="worker_name" type="text" pInputText formControlName="worker_name" readonly/>
+            <p-button icon="pi pi-search" id="btnSearch" (click)="lookupWorker()"></p-button>
+        </div>
+        
+        <div class="rowForm ">
+            <label for="worksite_name">Worksite:</label>
+            <input id="worksite_name" type="text" pInputText formControlName="worksite_name" readonly/>
+            <p-button icon="pi pi-search" id="btnSearch" (click)="lookupWorksite()"></p-button>
+        </div>
+        <div class="rowForm">
+            <label for="helmet_mac">Helmet:</label>
+            <input id="helmet_mac" type="text" pInputText formControlName="helmet_mac" readonly/>
+            <p-button icon="pi pi-search" id="btnSearch" (click)="lookupHelmet()"></p-button>
+        </div>
+        <div class="rowForm">
+            <label for="start_at">Start at:</label>
+            <p-datepicker [iconDisplay]="'input'" [showIcon]="true" inputId="icondisplay" formControlName="start_at"
+                dateFormat="dd/mm/yy" [showTime]="true" [hourFormat]="'24'" appendTo="body" />
+        </div>
+        <p-button type="submit" label="Submit" icon="pi pi-check" class="margin-left margin-top"></p-button>
+    </form>
+</div>
+
+<p-dialog header="Select worker" [(visible)]="showWorkerDialog" [modal]="true" [closable]="true" [draggable]="false"
+    [resizable]="false" [style]="{ width: '70vw' }">
+    <div class="p-fluid">
+        <div class="p-field rowForm">
+            <label for="name">Name:</label>
+            <input pInputText id="name" [(ngModel)]="filterWorkerValues.name" placeholder="Enter name" />
+        </div>
+        <div class="p-field rowForm">
+            <label for="surname">Surname:</label>
+            <input pInputText id="surname" [(ngModel)]="filterWorkerValues.surname" placeholder="Enter surname" />
+        </div>
+        <div class="p-field rowForm">
+            <label for="fiscal_code">Fiscal code:</label>
+            <input pInputText id="fiscal_code" [(ngModel)]="filterWorkerValues.fiscal_code" placeholder="Enter fiscal code" />
+        </div>
+    </div>
+    <br>
+    <button pButton type="button" label="Apply" icon="pi pi-check" class="p-button-success"
+            (click)="applyWorkerFilters()"></button>
+    <button pButton type="button" label="Reset" icon="pi pi-times" class="p-button-secondary margin-left"
+            (click)="clearFilter()"></button>
+
+    <br>
+    <p-table [value]="filteredWorkers" [paginator]="true" [rows]="10" dataKey="id" [tableStyle]="{ 'min-width': '50rem' }"
+        class="tableColor">
+        <ng-template #header>
+            <tr class="tableHeader">
+                <th style="width:10%">Code</th>
+                <th pSortableColumn="name" style="width:20%">Name
+                    <p-sortIcon field="name" />
+                </th>
+                <th pSortableColumn="surname" style="width:20%">Surname
+                    <p-sortIcon field="surname" />
+                </th>
+                <th style="width:20%">Fiscal code</th>
+                <th style="width:5%"></th>
+            </tr>
+        </ng-template>
+        <ng-template #body let-worker let-ri="rowIndex">
+            <tr class="tableRow">
+                <td>{{ worker.id }}</td>
+                <td>
+                    {{ worker.name }}
+                </td>
+                <td>
+                    {{ worker.surname }}
+                </td>
+                <td>
+                    {{ worker.fiscal_code }}
+                </td>
+                <td>
+                    <p-button rounded severity="secondary" label="Select" (click)="selectWorker(worker)"></p-button>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</p-dialog>
+
+
+<!-- Worksites dialog -->
+
+<p-dialog header="Select worksite" [(visible)]="showWorksiteDialog" [modal]="true" [closable]="true" [draggable]="false"
+    [resizable]="false" [style]="{ width: '70vw' }">
+    <div class="p-fluid">
+        <div class="p-field rowForm">
+            <label for="name">Name:</label>
+            <input pInputText id="name" [(ngModel)]="filterWorksiteValues.name" placeholder="Enter name" />
+        </div>
+        <div class="p-field rowForm">
+            <label for="address">Address:</label>
+            <input pInputText id="email" [(ngModel)]="filterWorksiteValues.address" placeholder="Enter address" />
+        </div>
+        <div class="p-field rowForm">
+            <label for="city">City:</label>
+            <input pInputText id="city" [(ngModel)]="filterWorksiteValues.city" placeholder="Enter city" />
+        </div>
+    </div>
+    <br>
+
+     <button pButton type="button" label="Apply" icon="pi pi-check" class="p-button-success"
+            (click)="applyWorksiteFilters()"></button>
+    <button pButton type="button" label="Reset" icon="pi pi-times" class="p-button-secondary margin-left"
+            (click)="clearFilter()"></button>
+
+    <p-table [value]="filteredWorksites" [paginator]="true" [rows]="10" dataKey="id" editMode="row"
+        [tableStyle]="{ 'min-width': '50rem' }" class="tableColor">
+        <ng-template #header>
+            <tr class="tableHeader">
+                <th style="width:10%">Code</th>
+                <th pSortableColumn="name" style="width:20%">Name
+                    <p-sortIcon field="name" />
+                </th>
+                <th style="width:20%">Address</th>
+                <th style="width:20%">City</th>
+                <th style="width:10%">State</th>
+                <th style="width:10%">Zip</th>
+                <th style="width:5%"></th>
+            </tr>
+        </ng-template>
+        <ng-template #body let-worksite let-editing="editing" let-ri="rowIndex">
+            <tr [pEditableRow]="worksite" class="tableRow">
+                <td>{{ worksite.id }}</td>
+                <td>
+                    <p-cellEditor>
+                        <ng-template #input>
+                            <input pInputText type="text" [(ngModel)]="worksite.name" required />
+                        </ng-template>
+                        <ng-template #output>
+                            {{ worksite.name }}
+                        </ng-template>
+                    </p-cellEditor>
+                </td>
+                <td>
+                    <p-cellEditor>
+                        <ng-template #input>
+                            <input pInputText type="text" [(ngModel)]="worksite.address" />
+                        </ng-template>
+                        <ng-template #output>
+                            {{ worksite.address }}
+                        </ng-template>
+                    </p-cellEditor>
+                </td>
+                <td>
+                    <p-cellEditor>
+                        <ng-template #input>
+                            <input pInputText type="text" [(ngModel)]="worksite.city" />
+                        </ng-template>
+                        <ng-template #output>
+                            {{ worksite.city }}
+                        </ng-template>
+                    </p-cellEditor>
+                </td>
+                <td>
+                    <p-cellEditor>
+                        <ng-template #input>
+                            <input pInputText type="text" [(ngModel)]="worksite.state" />
+                        </ng-template>
+                        <ng-template #output>
+                            {{ worksite.state }}
+                        </ng-template>
+                    </p-cellEditor>
+                </td>
+                <td>
+                    <p-cellEditor>
+                        <ng-template #input>
+                            <input pInputText type="text" [(ngModel)]="worksite.zip" />
+                        </ng-template>
+                        <ng-template #output>
+                            {{ worksite.zip_code }}
+                        </ng-template>
+                    </p-cellEditor>
+                </td>
+                <td>
+                    <p-button rounded severity="secondary" label="Select" (click)="selectWorksite(worksite)"></p-button>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+
+
+</p-dialog>
+
+<!-- Helmet dialog -->
+
+<p-dialog header="Select helmet" [(visible)]="showHelmetDialog" [modal]="true" [closable]="true" [draggable]="false"
+    [resizable]="false" [style]="{ width: '70vw' }">
+    <div class="p-fluid">
+        <div class="p-field rowForm">
+            <label for="mac_address">Mac address:</label>
+            <input pInputText id="mac_address" [(ngModel)]="filterHelmetValues.mac_address" placeholder="Enter mac address" />
+        </div>
+    </div>
+    <br>
+
+    <button pButton type="button" label="Apply" icon="pi pi-check" class="p-button-success"
+            (click)="applyHelmetFilters()"></button>
+    <button pButton type="button" label="Reset" icon="pi pi-times" class="p-button-secondary margin-left"
+            (click)="clearFilter()"></button>
+
+    <p-table [value]="filteredHelmets" [paginator]="true" [rows]="10" dataKey="id" editMode="row"
+        [tableStyle]="{'min-width': '50rem'}" class="tableColor">
+        <ng-template #header>
+            <tr class="tableHeader">
+                <th style="width:5%">Code</th>
+                <th style="width:10%">Mac address</th>
+                <th style="width:20%">Category</th>
+                <th style="width:5%"></th>
+            </tr>
+        </ng-template>
+        <ng-template #body let-helmet let-editing="editing" let-ri="rowIndex">
+            <tr [pEditableRow]="helmet" class="tableRow">
+                <td>
+                    {{helmet.id}}
+                </td>
+                <td>
+                    {{helmet.mac_address}}
+                </td>
+                <td>
+                    {{helmet.Category?.name || 'No Category'}}
+                </td>
+                <td>
+                    <p-button rounded severity="secondary" label="Select" (click)="selectHelmet(helmet)" />
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+
+</p-dialog>

@@ -80,3 +80,19 @@ p-inputgroup-addon {
     width: 100% !important;
     /* Override PrimeNG's default width */
 }
+
+.rowLogin {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.colLogin {
+    flex: 1;
+    text-align: center;
+}
+
+p-toast {
+    --p-toast-error-detail-color: #000000;
+    --p-toast-success-detail-color: #000000;
+}

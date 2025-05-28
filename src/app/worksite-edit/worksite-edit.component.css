@@ -97,3 +97,12 @@ p-toast {
 #pn_id_4_panel {
     top: -100px !important;
 }
+
+.p-dialog {
+    --p-dialog-background: white;
+    --p-dialog-color: black;
+}
+
+.p-confirmdialog-icon {
+    color: red !important;
+}

@@ -69,19 +69,19 @@
         <strong>Worksite zip:</strong> {{worksite.zip_code}}
     </div>
     <div class="detail-item" *ngIf="worksite">
-        <strong>Worksite temperature threshold:</strong> {{worksite.temperature_threshold}}
+        <strong>Worksite temperature threshold:</strong> {{worksite.temperature_threshold}} °C
     </div>
     <div class="detail-item" *ngIf="worksite">
-        <strong>Worksite humidity threshold:</strong> {{worksite.humidity_threshold}}
+        <strong>Worksite humidity threshold:</strong> {{worksite.humidity_threshold}} %
     </div>
     <div class="detail-item" *ngIf="worksite">
-        <strong>Worksite brightness threshold:</strong> {{worksite.brightness_threshold}}
+        <strong>Worksite brightness threshold:</strong> {{worksite.brightness_threshold}} Lux
     </div>
     <div class="detail-item" *ngIf="worksite">
-        <strong>Worksite posture threshold:</strong> {{worksite.posture_threshold}}
+        <strong>Worksite incorrect posture threshold:</strong> {{worksite.posture_threshold}} %
     </div>
     <div class="detail-item" *ngIf="worksite">
-        <strong>Worksite max g threshold:</strong> {{worksite.max_g_threshold}}
+        <strong>Worksite max acceleration magnitude threshold:</strong> {{worksite.max_g_threshold}} G
     </div>
 
 
@@ -103,16 +103,57 @@
     <p-tabs value="0">
         <p-tablist>
             <p-tab value="0">
+                <i class="pi pi-file-pdf"></i>
+                <span>Readings</span>
+            </p-tab>
+            <p-tab value="1">
                 <i class="pi pi-users"></i>
                 <span>Workers</span>
             </p-tab>
-            <p-tab value="1">
+            <p-tab value="2">
+                <i class="pi pi-comments"></i>
+                <span>Attendances</span>
+            </p-tab>
+            <p-tab value="3">
                 <i class="pi pi-chart-line"></i>
-                <span>Readings</span>
+                <span>Data view</span>
             </p-tab>
         </p-tablist>
         <p-tabpanels>
             <p-tabpanel value="0">
+                <p-table [value]="readings" [paginator]="true" [rows]="10" dataKey="id" editMode="row"
+                    [tableStyle]="{'min-width': '50rem'}" class="tableColor">
+                    <ng-template #header>
+                        <tr class="tableHeader">
+                            <th style="width:10%">Code</th>
+                            <th style="width:20%">Read at</th>
+                            <th style="width:20%">Anomaly</th>
+                            <th style="width:5%"></th>
+                        </tr>
+                    </ng-template>
+                    <ng-template #body let-reading let-ri="rowIndex">
+                        <tr class="tableRow">
+                            <td>
+                                {{reading.id}}
+                            </td>
+                            <td>
+                                {{reading.read_at | date:'dd/MM/yyyy HH:mm:ss'}}
+                            </td>
+                            <td>
+                                <span [ngStyle]="{'color': reading.anomaly ? 'red' : 'inherit'}">
+                                    {{reading.anomaly ? 'Detected' : 'Not detected' }}
+                                    <i *ngIf="reading.anomaly" class="pi pi-exclamation-triangle" style="margin-left: 5px;"></i>
+                                </span>
+                            </td>
+                            <td>
+                                <p-button icon="pi pi-info" text rounded severity="secondary"
+                                    [routerLink]="['/readings', reading.id]" />
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </p-tabpanel>
+            <p-tabpanel value="1">
                 <p class="m-0">
                     <p-table [value]="workers" [paginator]="true" [rows]="10" dataKey="id" editMode="row"
                         [tableStyle]="{'min-width': '50rem'}" class="tableColor">
@@ -145,34 +186,48 @@
                     </p-table>
                 </p>
             </p-tabpanel>
-            <p-tabpanel value="1">
-                <p-table [value]="readings" [paginator]="true" [rows]="10" dataKey="id" editMode="row"
+            <p-tabpanel value="2">
+                <p-table [value]="attendances" [paginator]="true" [rows]="10" dataKey="id" editMode="row"
                     [tableStyle]="{'min-width': '50rem'}" class="tableColor">
                     <ng-template #header>
                         <tr class="tableHeader">
                             <th style="width:10%">Code</th>
-                            <th style="width:20%">Read at</th>
-                            <th style="width:20%">Anomalous</th>
+                            <th style="width:20%">Worker ID</th>
+                            <th style="width:20%">Worksite ID</th>
+                            <th style="width:20%">Helmet ID</th>
+                            <th style="width:20%">Start at</th>
                             <th style="width:5%"></th>
+                            
                         </tr>
                     </ng-template>
-                    <ng-template #body let-reading let-ri="rowIndex">
+                    <ng-template #body let-attendance let-ri="rowIndex">
                         <tr class="tableRow">
                             <td>
-                                {{reading.id}}
+                                {{attendance.id}}
                             </td>
                             <td>
-                                {{reading.read_at | date:'dd/MM/yyyy HH:mm:ss'}}
+                                {{attendance.worker_id}}
                             </td>
                             <td>
-                                {{reading.anomaly}}
+                                {{attendance.worksite_id}}
                             </td>
                             <td>
-                                <p-button icon="pi pi-info" text rounded severity="secondary" [routerLink]="['/readings', reading.id]" />
+                                {{attendance.helmet_id}}
                             </td>
+                            <td>
+                                {{attendance.start_at | date:'dd/MM/yyyy HH:mm:ss'}}
+                            </td>
+                            <td>
+                                <p-button icon="pi pi-info" text rounded severity="secondary" [routerLink]="['/attendance', attendance.id]" />
+                            </td>
+                            
                         </tr>
                     </ng-template>
                 </p-table>
+            </p-tabpanel>
+            <p-tabpanel value="3">
+                <p-chart *ngIf="lineChartData" type="line" [data]="lineChartData" [options]="lineChartOptions">
+                </p-chart>
             </p-tabpanel>
         </p-tabpanels>
     </p-tabs>

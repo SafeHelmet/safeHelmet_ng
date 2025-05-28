@@ -1,0 +1,73 @@
+<div class="row">
+    <div class="column">
+        <h2>Attendances</h2>
+    </div>
+    <div class="column">
+        <p-button (click)="newAttendance()" icon="pi pi-plus" class="float-right"></p-button>
+    </div>
+</div>
+<div class="row">
+    <p-button label="Filter" class="filterButt"></p-button>
+</div>
+
+<!-- <p-dialog header="Filter options" [(visible)]="showFilterDialog" [modal]="true" [closable]="true" [draggable]="false"
+    [resizable]="false" [style]="{ width: '50vw' }">
+    <div class="p-fluid">
+        <div class="p-field rowForm">
+            <label for="name">Name:</label>
+            <input pInputText id="name" [(ngModel)]="filterValues.name" placeholder="Enter name" />
+        </div>
+        <div class="p-field rowForm">
+            <label for="surname">Surname:</label>
+            <input pInputText id="surname" [(ngModel)]="filterValues.surname" placeholder="Enter surname" />
+        </div>
+        <div class="p-field rowForm">
+            <label for="fiscal_code">Fiscal code:</label>
+            <input pInputText id="fiscal_code" [(ngModel)]="filterValues.fiscal_code" placeholder="Enter fiscal code" />
+        </div>
+    </div>
+    <br>
+
+    <div class="dialog-footer">
+        <button pButton type="button" label="Apply" icon="pi pi-check" class="p-button-success"
+            (click)="applyFilters()"></button>
+        <button pButton type="button" label="Reset" icon="pi pi-times" class="p-button-secondary margin-left"
+            (click)="clearFilter()"></button>
+    </div>
+</p-dialog> -->
+
+
+
+<p-toast></p-toast>
+
+<br>
+
+<p-table [value]="filteredAttendances" [paginator]="true" [rows]="10" dataKey="id" [tableStyle]="{ 'min-width': '50rem' }"
+    class="tableColor">
+    <ng-template #header>
+        <tr class="tableHeader">
+            <th style="width:10%">Code</th>
+            <th style="width:20%">Worker</th>
+            <th style="width:20%">Worksite</th>
+            <th style="width:20%">Helmet MAC</th>
+            <th style="width:5%"></th>
+        </tr>
+    </ng-template>
+    <ng-template #body let-attendance let-ri="rowIndex">
+        <tr class="tableRow">
+            <td>{{ attendance.id }}</td>
+            <td>
+                {{ getWorkerName(attendance.worker_id) }}
+            </td>
+            <td>
+                {{ getWorksiteAddress(attendance.worksite_id) }}
+            </td>
+            <td>
+                {{ getHelmetMac(attendance.helmet_id) }}
+            </td>
+            <td>
+                <p-button icon="pi pi-info" text rounded severity="secondary" [routerLink]="['/attendance', attendance.id]" />
+            </td>
+        </tr>
+    </ng-template>
+</p-table>

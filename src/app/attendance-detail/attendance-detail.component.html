@@ -1,0 +1,27 @@
+
+<div class="row">
+    <div class="column">
+        <h2>Detail</h2>
+    </div>
+    <div class="column">
+        <p-button (click)="edit()" icon="pi pi-pencil" class="float-right margin-right" label="Edit" />
+        <p-button (click)="back()" icon="pi pi-angle-left" class="float-right margin-right" label="Back" />
+    </div>
+</div>
+<div class="details-container">
+    <div class="detail-item" *ngIf="worker">
+        <strong>Worker:</strong> <a *ngIf="attendance" [routerLink]="['/worker', attendance.worker_id]" class="worksite-link"> {{worker.name}} {{worker.surname}} </a>
+    </div>
+    <div class="detail-item" *ngIf="worksite">
+        <strong>Worksite:</strong> <a *ngIf="attendance" [routerLink]="['/worksites', attendance.worksite_id]" class="worksite-link"> {{worksite.name}}</a>
+    </div>
+    <div class="detail-item" *ngIf="helmet">
+        <strong>Helmet MAC address:</strong> <a *ngIf="attendance" [routerLink]="['/helmet', attendance.helmet_id]" class="worksite-link"> {{helmet.mac_address}} </a>
+    </div>
+    <div class="detail-item" *ngIf="attendance">
+        <strong>Start at:</strong> {{attendance.start_at | date:'dd/MM/yyyy HH:mm:ss'}}
+    </div>
+    <div class="detail-item" *ngIf="attendance">
+        <strong>End at:</strong> {{attendance.end_at | date:'dd/MM/yyyy HH:mm:ss'}}
+    </div>
+</div>

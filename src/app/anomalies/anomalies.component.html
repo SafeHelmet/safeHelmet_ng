@@ -50,9 +50,9 @@
     <ng-template #header>
         <tr class="tableHeader">
             <th style="width:10%">Code</th>
-            <th style="width:20%">Helmet</th>
+            <th style="width:20%">Helmet MAC</th>
             <th style="width:20%">Read at</th>
-            <th style="width:10%">Anomalous</th>
+            <th style="width:10%">Anomaly</th>
             <th style="width:5%"></th>
         </tr>
     </ng-template>
@@ -67,7 +67,7 @@
                         <input pInputText type="text" [(ngModel)]="reading.helmet_id" required />
                     </ng-template>
                     <ng-template #output>
-                        {{reading.helmet_id}}
+                        {{ getHelmetMacAddress(reading.attendance_id) }}
                     </ng-template>
                 </p-cellEditor>
             </td>
@@ -88,7 +88,7 @@
                     </ng-template>
                     <ng-template #output>
                         <span [ngStyle]="{'color': reading.anomaly ? 'red' : 'inherit'}">
-                            {{reading.anomaly}}
+                            {{reading.anomaly ? 'Detected' : 'Not detected' }}
                             <i *ngIf="reading.anomaly" class="pi pi-exclamation-triangle" style="margin-left: 5px;"></i>
                         </span>
                     </ng-template>

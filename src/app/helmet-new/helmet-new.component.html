@@ -12,26 +12,55 @@
 <div class="form-container">
     <form [formGroup]="helmetForm" (ngSubmit)="addHelmet()">
         <div class="rowForm">
-            <label for="name">Category:</label>
-            <input id="name" type="text" pInputText formControlName="category" />
-        </div>
-        <div class="rowForm ">
-            <label for="address">Current worker:</label>
-            <input id="address" type="text" pInputText formControlName="workerId" />
+            <label for="mac_address">Mac address:</label>
+            <input id="mac_address" type="text" pInputText formControlName="mac_address" />
         </div>
         <div class="rowForm">
-            <label for="city">Sensor1:</label>
-            <input id="city" type="text" pInputText formControlName="sensor1" />
-        </div>
-        <div class="rowForm">
-            <label for="city">Sensor2:</label>
-            <input id="city" type="text" pInputText formControlName="sensor2" />
-        </div>
-        <div class="rowForm">
-            <label for="city">Sensor3:</label>
-            <input id="city" type="text" pInputText formControlName="sensor3" />
+            <label for="category_id">Category:</label>
+            <input id="category_id" type="number" pInputText formControlName="category_id" />
+            <p-button icon="pi pi-search" id="btnSearch" (click)="lookup()" ></p-button>
         </div>
         <p-button type="submit" label="Submit" icon="pi pi-check" class="margin-left margin-top"></p-button>
     </form>
 </div>
+
+<p-dialog header="Select category" [(visible)]="showSearchDialog" [modal]="true" [closable]="true" [draggable]="false"
+    [resizable]="false" [style]="{ width: '70vw' }">
+    <div class="p-fluid">
+        <div class="p-field rowForm">
+            <label for="name">Name:</label>
+            <input pInputText id="name" [(ngModel)]="filterValues.name" placeholder="Enter name" />
+        </div>
+    </div>
+    <br>
+    <button pButton type="button" label="Apply" icon="pi pi-check" class="p-button-success margin-bottom"
+        (click)="applyFilters()"></button>
+    <button pButton type="button" label="Reset" icon="pi pi-times" class="p-button-secondary margin-left margin-bottom"
+        (click)="clearFilter()"></button>
+
+    <br>
+    <p-table [value]="filteredCategories" [paginator]="true" [rows]="10" dataKey="id"
+        [tableStyle]="{ 'min-width': '50rem' }" class="tableColor">
+        <ng-template #header>
+            <tr class="tableHeader">
+                <th style="width:10%">Code</th>
+                <th pSortableColumn="name" style="width:20%">Name
+                    <p-sortIcon field="name" />
+                </th>
+                <th style="width:5%"></th>
+            </tr>
+        </ng-template>
+        <ng-template #body let-category let-ri="rowIndex">
+            <tr class="tableRow">
+                <td>{{ category.id }}</td>
+                <td>
+                    {{ category.name }}
+                </td>
+                <td>
+                    <p-button rounded severity="secondary" label="Select" (click)="selectCategory(category)"></p-button>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</p-dialog>
 

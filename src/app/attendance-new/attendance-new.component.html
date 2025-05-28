@@ -1,0 +1,35 @@
+
+<div class="row">
+    <div class="column">
+        <h2>New Worker Attendance</h2>
+    </div>
+    <div class="column">
+        <p-button (click)="back()" icon="pi pi-angle-left" class="float-right margin-right" label="Back" />
+    </div>
+</div>
+
+<p-toast />
+
+<div class="form-container" *ngIf="workerAttendanceForm">
+    <form [formGroup]="workerAttendanceForm" (ngSubmit)="addAttendance()">
+        <div class="rowForm">
+            <label for="worker_name">Name:</label>
+            <input id="worker_name" type="text" pInputText formControlName="worker_name" readonly />
+        </div>
+        <div class="rowForm ">
+            <label for="worksite_name">Worksite:</label>
+            <input id="worksite_name" type="text" pInputText formControlName="worksite_name" readonly />
+        </div>
+        <div class="rowForm">
+            <label for="helmet_mac">Helmet:</label>
+            <input id="helmet_mac" type="text" pInputText formControlName="helmet_mac" />
+        </div>
+        <div class="rowForm">
+            <label for="start_at">Start at:</label>
+            <p-datepicker [iconDisplay]="'input'" [showIcon]="true" inputId="icondisplay" formControlName="start_at"
+                dateFormat="dd/mm/yy" [showTime]="true" [hourFormat]="'24'" appendTo="body" />
+        </div>
+        <br>
+        <p-button type="submit" label="Submit" icon="pi pi-check" class="margin-left margin-top"></p-button>
+    </form>
+</div>

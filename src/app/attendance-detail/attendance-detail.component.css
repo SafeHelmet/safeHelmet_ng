@@ -1,0 +1,60 @@
+.column {
+    float: left;
+    width: 50%;
+}
+
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.float-right {
+    float: right;
+    margin-top: 18px;
+}
+
+.margin-right {
+    margin-right: 0.5rem;
+}
+
+.margin-top {
+    margin-top: 1rem;
+}
+
+.details-container {
+    margin-top: 1rem;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+    font-size: 1rem;
+    color: #333;
+}
+
+.detail-item {
+    padding: 0.5rem;
+    background-color: #f9f9f9;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+}
+
+.detail-item strong {
+    font-weight: bold;
+    color: #555;
+}
+
+
+.right-space {
+    margin-right: 1rem;
+}
+
+.worksite-link {
+    color: #007bff;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.worksite-link:hover {
+    text-decoration: underline;
+}

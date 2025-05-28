@@ -24,9 +24,127 @@
         <strong>Phone:</strong> {{worker.phone}}
     </div>
     <div class="detail-item" *ngIf="worker">
-        <strong>Current worksite:</strong> {{ worksiteName }}
-    </div>
-    <div class="detail-item" *ngIf="worker">
         <strong>Helmet assigned:</strong> {{worker.phone}}
     </div>
+</div>
+
+<div class="margin-top">
+    <p-tabs value="0">
+        <p-tablist>
+            <p-tab value="0">
+                <i class="pi pi-file-pdf"></i>
+                <span>Readings</span>
+            </p-tab>
+            <p-tab value="1">
+                <i class="pi pi-building"></i>
+                <span>Worksites</span>
+            </p-tab>
+            <p-tab value="2">
+                <i class="pi pi-comments"></i>
+                <span>Attendances</span>
+            </p-tab>
+        </p-tablist>
+        <p-tabpanels>
+            <p-tabpanel value="0">
+                <p-table [value]="readings" [paginator]="true" [rows]="10" dataKey="id" editMode="row"
+                    [tableStyle]="{'min-width': '50rem'}" class="tableColor">
+                    <ng-template #header>
+                        <tr class="tableHeader">
+                            <th style="width:10%">Code</th>
+                            <th style="width:20%">Read at</th>
+                            <th style="width:20%">Anomaly</th>
+                            <th style="width:5%"></th>
+                        </tr>
+                    </ng-template>
+                    <ng-template #body let-reading let-ri="rowIndex">
+                        <tr class="tableRow">
+                            <td>
+                                {{reading.id}}
+                            </td>
+                            <td>
+                                {{reading.read_at | date:'dd/MM/yyyy HH:mm:ss'}}
+                            </td>
+                            <td>
+                                <span [ngStyle]="{'color': reading.anomaly ? 'red' : 'inherit'}">
+                                    {{reading.anomaly ? 'Detected' : 'Not detected' }}
+                                    <i *ngIf="reading.anomaly" class="pi pi-exclamation-triangle" style="margin-left: 5px;"></i>
+                                </span>
+                            </td>
+                            <td>
+                                <p-button icon="pi pi-info" text rounded severity="secondary"
+                                    [routerLink]="['/readings', reading.id]" />
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </p-tabpanel>
+            <p-tabpanel value="1">
+                <p class="m-0">
+                    <p-table [value]="worksites" [paginator]="true" [rows]="10" dataKey="id" editMode="row"
+                        [tableStyle]="{'min-width': '50rem'}" class="tableColor">
+                        <ng-template #header>
+                            <tr class="tableHeader">
+                                <th style="width:10%">Code</th>
+                                <th style="width:20%">Name</th>
+                                <th style="width:5%"></th>
+                            </tr>
+                        </ng-template>
+                        <ng-template #body let-worksite let-ri="rowIndex">
+                            <tr class="tableRow">
+                                <td>
+                                    {{worksite.id}}
+                                </td>
+                                <td>
+                                    {{worksite.name}}
+                                </td>
+                                <td>
+                                    <p-button icon="pi pi-info" text rounded severity="secondary"
+                                        [routerLink]="['/worksites', worksite.id]" />
+                                </td>
+
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </p>
+            </p-tabpanel>
+            <p-tabpanel value="2">
+                <p-table [value]="attendances" [paginator]="true" [rows]="10" dataKey="id" editMode="row"
+                    [tableStyle]="{'min-width': '50rem'}" class="tableColor">
+                    <ng-template #header>
+                        <tr class="tableHeader">
+                            <th style="width:10%">Code</th>
+                            <th style="width:20%">Worker ID</th>
+                            <th style="width:20%">Worksite ID</th>
+                            <th style="width:20%">Helmet ID</th>
+                            <th style="width:20%">Start at</th>
+                            <th style="width:5%"></th>
+                        </tr>
+                    </ng-template>
+                    <ng-template #body let-attendance let-ri="rowIndex">
+                        <tr class="tableRow">
+                            <td>
+                                {{attendance.id}}
+                            </td>
+                            <td>
+                                {{attendance.worker_id}}
+                            </td>
+                            <td>
+                                {{attendance.worksite_id}}
+                            </td>
+                            <td>
+                                {{attendance.helmet_id}}
+                            </td>
+                            <td>
+                                {{attendance.start_at | date:'dd/MM/yyyy HH:mm:ss'}}
+                            </td>
+                            <td>
+                                <p-button icon="pi pi-info" text rounded severity="secondary"
+                                    [routerLink]="['/attendance', attendance.id]" />
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </p-tabpanel>
+        </p-tabpanels>
+    </p-tabs>
 </div>

@@ -16,6 +16,16 @@ import { WorkersComponent } from './workers/workers.component';
 import { WorkerDetailComponent } from './worker-detail/worker-detail.component';
 import { WorkerEditComponent } from './worker-edit/worker-edit.component';
 import { authGuard } from './auth.guard'; // Import your guard
+import { HelmetEditComponent } from './helmet-edit/helmet-edit.component';
+import { HelmetDetailComponent } from './helmet-detail/helmet-detail.component';
+import { AttendancesComponent } from './attendances/attendances.component';
+import { AttendanceNewComponent } from './attendance-new/attendance-new.component';
+import { AttendanceDetailComponent } from './attendance-detail/attendance-detail.component';
+import { BossesComponent } from './bosses/bosses.component';
+import { AttendancesQuickaddComponent } from './attendances-quickadd/attendances-quickadd.component';
+import { BossDetailComponent } from './boss-detail/boss-detail.component';
+import { BossEditComponent } from './boss-edit/boss-edit.component';
+import { BossNewComponent } from './boss-new/boss-new.component';
 
 export const routes: Routes = [
   {
@@ -27,9 +37,14 @@ export const routes: Routes = [
     loadComponent: () => import('./login/login.component').then(m => m.LoginComponent)
   },
   {
+    path: 'boss-selection',
+    loadComponent: () => import('./boss-selection/boss-selection.component').then(m => m.BossSelectionComponent),
+    canActivate: [authGuard]
+  },
+  {
     path: 'dashboard',
     loadComponent: () => import('./dashboard/dashboard.component').then(m => m.DashboardComponent),
-    canActivate: [authGuard] // Protect the dashboard route
+    canActivate: [authGuard] 
   },
   {
     path: '',
@@ -44,13 +59,23 @@ export const routes: Routes = [
       { path: 'readings/:id', component: ReportDetailComponent, canActivate: [authGuard] },
       { path: 'helmets', component: HelmetsComponent, canActivate: [authGuard] },
       { path: 'helmet/new', component: HelmetNewComponent, canActivate: [authGuard] },
+      { path: 'helmet/:id', component: HelmetDetailComponent, canActivate: [authGuard] },
+      { path: 'helmet/:id/edit', component: HelmetEditComponent, canActivate: [authGuard] },
       { path: 'workers', component: WorkersComponent, canActivate: [authGuard] },
-      { path: 'worker/new', component: WorkerNewComponent, canActivate: [authGuard] },
+      { path: 'worksite/:id/assign', component: WorkerNewComponent, canActivate: [authGuard] },
       { path: 'worker/:id', component: WorkerDetailComponent, canActivate: [authGuard] },
       { path: 'worker/:id/edit', component: WorkerEditComponent, canActivate: [authGuard] },
       { path: 'anomalies', component: AnomaliesComponent, canActivate: [authGuard] },
+      { path: 'attendances', component: AttendancesComponent, canActivate: [authGuard] },
+      { path: 'attendance/:id', component: AttendanceDetailComponent, canActivate: [authGuard] },
+      { path: 'attendances/new', component: AttendanceNewComponent, canActivate: [authGuard] },
+      { path: 'attendances/quickadd/add', component: AttendancesQuickaddComponent, canActivate: [authGuard] },
       { path: 'accounts', component: AccountsComponent, canActivate: [authGuard] },
-      { path: 'accounts/new', component: AccountNewComponent, canActivate: [authGuard] }
+      { path: 'accounts/new', component: AccountNewComponent, canActivate: [authGuard] },
+      { path: 'bosses', component: BossesComponent, canActivate: [authGuard] },
+      { path: 'boss/:id', component: BossDetailComponent, canActivate: [authGuard] },
+      { path: 'boss/:id/edit', component: BossEditComponent, canActivate: [authGuard] },
+      { path: 'bosses/new', component: BossNewComponent, canActivate: [authGuard] }
     ]
   },
   { path: '**', redirectTo: '' }

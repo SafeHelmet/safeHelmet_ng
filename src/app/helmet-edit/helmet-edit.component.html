@@ -1,0 +1,33 @@
+
+<p-confirmDialog #confirmDialog [message]="deleteMessage" header="Confirm" icon="pi pi-exclamation-triangle"
+    [acceptLabel]="'Yes'" [rejectLabel]="'No'" (accept)="onConfirmDelete()" (reject)="onRejectDelete()">
+</p-confirmDialog>
+
+
+
+<div class="row">
+    <div class="column">
+        <h2>Edit Helmet</h2>
+    </div>
+    <div class="column">
+        <p-button (click)="confirmDelete()" icon="pi pi-trash" class="float-right margin-right" label="Delete" />
+        <p-button (click)="back()" icon="pi pi-angle-left" class="float-right margin-right" label="Back" />
+    </div>
+</div>
+
+<p-toast />
+
+<div class="form-container" *ngIf="helmetForm">
+    <form [formGroup]="helmetForm" (ngSubmit)="editHelmet()">
+        <div class="rowForm">
+            <label for="mac_address">Mac address:</label>
+            <input id="mac_address" type="text" pInputText formControlName="mac_address" />
+        </div>
+        <div class="rowForm ">
+            <label for="category_id">Category ID:</label>
+            <input id="category_id" type="text" pInputText formControlName="category_id" />
+        </div>
+        <br>
+        <p-button type="submit" label="Submit" icon="pi pi-check" class="margin-left margin-top"></p-button>
+    </form>
+</div>

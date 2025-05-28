@@ -1,0 +1,41 @@
+<div class="row">
+    <div class="column">
+        <h2>New Boss</h2>
+    </div>
+    <div class="column">
+        <p-button (click)="back()" icon="pi pi-angle-left" class="float-right margin-right" label="Back" />
+    </div>
+</div>
+
+
+<p-toast />
+
+<div class="form-container">
+    <form [formGroup]="workerForm" (ngSubmit)="addBoss()">
+        <div class="rowForm">
+            <label for="name">Name:</label>
+            <input id="name" type="text" pInputText formControlName="name" />
+        </div>
+        <div class="rowForm ">
+            <label for="surname">Surname:</label>
+            <input id="surname" type="text" pInputText formControlName="surname" />
+        </div>
+        <div class="rowForm">
+            <label for="email">Email:</label>
+            <input id="email" type="text" pInputText formControlName="email" />
+        </div>
+        <div class="rowForm">
+            <label for="password">Password:</label>
+            <input id="password" type="text" pInputText formControlName="password" />
+        </div>
+        <div class="rowForm">
+            <label for="phone">Phone:</label>
+            <input id="phone" type="text" pInputText formControlName="phone" />
+        </div>
+        <div class="rowForm">
+            <label for="fiscal_code">Fiscal code:</label>
+            <input id="fiscal_code" type="text" pInputText formControlName="fiscal_code" />
+        </div>
+        <p-button type="submit" label="Submit" icon="pi pi-check" class="margin-left margin-top"></p-button>
+    </form>
+</div>

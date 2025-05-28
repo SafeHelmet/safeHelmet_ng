@@ -1,4 +1,4 @@
-import { Helmet } from "./helmet";
+import { WorkerAttendance } from "./worker_attendance";
 
 export interface Reading {
     id?: number,
@@ -22,6 +22,16 @@ export interface Reading {
     max_G: number,
     incorrect_posture: number,
     anomaly: boolean,
-    helmet_id?: number,
-    Helmet?: Helmet
+    attendance_id?: number,
+    anomalous_temperature: boolean,
+    anomalous_humidity: boolean,
+    anomalous_brightness: boolean,
+    anomalous_max_g: boolean,
+    anomalous_posture: boolean,
+    weather_temperature_max: number,
+    weather_temperature_min: number, 
+    weather_temperature: number,
+    weather_humidity: number,
+    weather_brightness: number,
+    WorkerAttendance?: WorkerAttendance
 }

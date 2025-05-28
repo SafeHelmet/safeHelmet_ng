@@ -428,3 +428,8 @@
         padding: 0.3rem 0.6rem;
     }
 }
+
+.p-menubar-mobile .p-menubar-root-list {
+    --p-menubar-submenu-background: none;
+    --p-menubar-submenu-border-color: none;
+} 

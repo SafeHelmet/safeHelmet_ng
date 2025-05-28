@@ -1,0 +1,18 @@
+
+<div class="row">
+    <div class="column">
+        <h2>Detail</h2>
+    </div>
+    <div class="column">
+        <p-button (click)="edit()" icon="pi pi-pencil" class="float-right margin-right" label="Edit" />
+        <p-button (click)="back()" icon="pi pi-angle-left" class="float-right margin-right" label="Back" />
+    </div>
+</div>
+<div class="details-container">
+    <div class="detail-item" *ngIf="helmet">
+        <strong>Mac address:</strong> {{helmet.mac_address}}
+    </div>
+    <div class="detail-item" *ngIf="helmet">
+        <strong>Category ID:</strong> {{ getCategoryName(helmet.category_id) }}
+    </div>
+</div>

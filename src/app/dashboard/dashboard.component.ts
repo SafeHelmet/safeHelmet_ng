@@ -8,6 +8,7 @@ import { Router, RouterOutlet } from '@angular/router';
 import { RouterLink } from '@angular/router';
 import { Button } from 'primeng/button';
 import { AuthService } from '../services/auth.service';
+import { BossService } from '../services/boss.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -27,8 +28,20 @@ import { AuthService } from '../services/auth.service';
 })
 export class DashboardComponent {
 
+  bossName: string = '';
 
-  constructor(private router: Router, private authService: AuthService) { }
+  constructor(private router: Router, private authService: AuthService, private bossService: BossService) { 
+    const bossId = localStorage.getItem('boss_id');
+    if (bossId) {
+      this.bossService.getBossById(bossId).subscribe((boss) => {
+        if (boss) {
+          this.bossName = `${boss.name} ${boss.surname}`; 
+        }
+      });
+    }
+  }
+  
+
   topItems = [
     {
       
@@ -64,6 +77,18 @@ export class DashboardComponent {
       label: 'Anomalies',
       icon: 'pi pi-bell',
       routerLink: ['/anomalies'],
+      style: { color: 'black' }
+    },
+    {
+      label: 'Attendances',
+      icon: 'pi pi-comments',
+      routerLink: ['/attendances'],
+      style: { color: 'black' }
+    },
+    {
+      label: 'Bosses',
+      icon: 'pi pi-megaphone',
+      routerLink: ['/bosses'],
       style: { color: 'black' }
     }
   ];

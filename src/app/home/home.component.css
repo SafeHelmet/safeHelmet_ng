@@ -10,9 +10,16 @@
     background-color: #f1f1f1;
 }
 
+#pageFirst {
+    position: relative;
+    height: 70vh;
+    width: 100vw;
+    background-color: #f1f1f1;
+}
+
 #page1 {
     position: relative;
-    height: 100vh;
+    /*height: 110vh;*/
     width: 100vw;
     background-color: #f1f1f1;
 }
@@ -22,9 +29,24 @@
     height: 100vh;
     width: 100vw;
     background-color: #f1f1f1;
+    
 }
 
 #page3 {
+    position: relative;
+    height: 20vh;
+    width: 100vw;
+    background-color: #f1f1f1;
+}
+
+#page4 {
+    position: relative;
+    height: 80vh;
+    width: 100vw;
+    background-color: #f1f1f1;
+}
+
+#page5 {
     position: relative;
     height: 100vh;
     width: 100vw;
@@ -385,4 +407,187 @@ a {
     font-weight: bold;
     font-size: 30px;
     color: black;
+}
+
+@font-face {
+    font-family: 'CustomFont';
+    src: url('/safeHelmet_ng/assets/fonts/Concept-JLd7.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'CustomFont';
+    src: url('/safeHelmet_ng/assets/fonts/ConceptSolid-Gmwm.otf') format('opentype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+.construction-font-text {
+    font-family: 'CustomFont', sans-serif;
+    font-weight: normal;
+}
+
+.construction-font-text-bold {
+    font-family: 'CustomFont', sans-serif;
+    font-weight: bold;
+}
+
+.size30 {
+    font-size: 50px;
+}
+
+.size6 {
+    font-size: 6px;
+}
+
+.textCarouselLogo {
+    text-align: center;
+    font-size: 26px;
+    margin-top: 16px;
+}
+
+
+
+
+
+/*  fffff   */
+
+.strangeCarouselContainer {
+    width: 100%;
+    max-width: 1200px;
+    /* Adjust as needed for your layout */
+    margin: 0 auto;
+    /* Centers the carousel container */
+    padding: 20px;
+    background-color: #ffffff;
+    /* White background */
+    border-radius: 10px;
+    /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* Subtle shadow for depth */
+}
+
+.strangeCarouselContainer h2 {
+    font-size: 1.5rem;
+    /* Adjust heading size */
+    margin-bottom: 20px;
+    /* Spacing below the title */
+    color: #333;
+    /* Dark text for contrast */
+}
+
+.carousel-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.carousel-image {
+    width: 150px;
+    /* Set a fixed width for the images */
+    height: 150px;
+    /* Set a fixed height for the images */
+    object-fit: contain;
+    /* This ensures the image is scaled properly without distortion */
+    border-radius: 8px;
+    /* Optional: adds rounded corners to the images */
+}
+
+.sketchfab-embed-wrapper {
+    display: flex;
+    /* Enables flexbox */
+    flex-direction: column;
+    /* Stacks iframe and p tag */
+    justify-content: center;
+    /* Centers vertically */
+    align-items: center;
+    /* Centers horizontally */
+    
+    /* Ensures it occupies full viewport height */
+}
+
+.sketchfab-embed-wrapper iframe {
+    width: 100%;
+    /* Adjust the width as needed */
+    max-width: 800px;
+    /* Set a maximum width */
+    height: 450px;
+    /* Adjust the height */
+    border: none;
+    /* Removes border */
+}
+
+.sketchfab-embed-wrapper p {
+    text-align: center;
+    /* Centers text */
+    margin-top: 10px;
+    /* Adds some spacing */
+}
+
+.ag-format-container-contact {
+    width: 1142px;
+    margin: 0 auto;
+    text-align: center;
+    /* Centers the content */
+    padding: 10px;
+    /* Adds some spacing */
+}
+
+.ag-courses_box-contact {
+    display: flex;
+    justify-content: center;
+    /* Centers text */
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 50px 0;
+}
+
+.contact-info {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    /* Adds space between items */
+    margin-top: 20px;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    /* Aligns icon and text vertically */
+    gap: 10px;
+    /* Adds space between the icon and text */
+    font-size: 25px;
+    /* Adjust font size */
+    color: #4a4a4a;
+    /* Text color */
+}
+
+.contact-item .icon {
+    font-size: 24px;
+    /* Icon size */
+    color: #1CAAD9;
+    /* Icon color */
+}
+
+.ag-courses_box-first {
+    display: flex;
+    justify-content: center;
+    /* Centers text */
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 10px 0;
+}
+
+.ag-courses_box-first-title {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: start;
+    -ms-flex-align: start;
+    align-items: flex-start;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+
+    padding: 10px 0;
 }

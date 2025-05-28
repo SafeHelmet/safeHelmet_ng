@@ -12,73 +12,193 @@
         <strong>Reading ID:</strong> {{reading.id}}
     </div>
     <div class="detail-item" *ngIf="reading">
-        <strong>Worker:</strong> {{worker?.name}} {{worker?.surname}}
+        <strong>Worker:</strong> <a *ngIf="worker" [routerLink]="['/worker', worker.id]" class="worksite-link"> {{worker?.name}} {{worker?.surname}}</a>
     </div>
     <div class="detail-item" *ngIf="reading">
-        <strong>Worksite location:</strong> {{worksite?.address}}, {{worksite?.city}}, {{worksite?.state}}
+        <strong>Worksite location:</strong> <a *ngIf="worksite" [routerLink]="['/worksites', worksite.id]" class="worksite-link"> {{worksite?.address}}, {{worksite?.city}}, {{worksite?.state}}</a>
+    </div>
+    <div class="detail-item" *ngIf="reading">
+        <strong>Helmet MAC:</strong> <a *ngIf="helmet" [routerLink]="['/helmet', helmet.id]"
+            class="worksite-link"> {{helmet?.mac_address}}</a>
+    </div>
+    <div class="detail-item anomalous" *ngIf="reading">
+        <strong>Anomalous:</strong>
+        <span [ngStyle]="{'color': reading.anomaly ? 'red' : 'inherit'}">
+            {{reading.anomaly ? 'Detected' : 'Not detected' }}
+            <i *ngIf="reading.anomaly" class="pi pi-exclamation-triangle" style="margin-left: 5px;"></i>
+        </span>
     </div>
     <div class="detail-item" *ngIf="reading">
         <strong>Read At:</strong> {{reading.read_at | date:'dd/MM/yyyy HH:mm:ss'}}
     </div>
     <div class="detail-item" *ngIf="reading">
-        <strong>Temperature:</strong> {{reading.temperature}}
+        <strong>Temperature:</strong>
+        <div class="temp-container" [ngStyle]="{'color': reading.anomalous_temperature ? 'red' : 'inherit'}">
+            <div class="temp-item">
+                <span class="label">Min:</span>
+                <span class="value">{{ (reading.weather_temperature_min || 0) }} °C</span>
+            </div>
+            <div class="temp-item">
+                <span class="label">Current:</span>
+                <span class="value">{{ reading.temperature }} °C</span>
+            </div>
+            <div class="temp-item">
+                <span class="label">Max:</span>
+                <span class="value">{{ (reading.weather_temperature_max || 0) }} °C</span>
+            </div>
+            <div class="temp-item">
+                <span class="label">Threshold:</span>
+                <span class="value">± {{ worksite?.temperature_threshold || 'N/A' }} °C</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="detail-item" *ngIf="reading">
+        <strong>Humidity:</strong>
+        <div class="temp-container" [ngStyle]="{'color': reading.anomalous_humidity ? 'red' : 'inherit'}">
+            <div class="temp-item">
+                <span class="label">Current:</span>
+                <span class="value">{{reading.humidity}} % </span>
+            </div>
+            <div class="temp-item">
+                <span class="label">Weather read:</span>
+                <span class="value">{{ (reading?.weather_humidity || 0) }} %</span>
+            </div>
+            <div class="temp-item">
+                <span class="label">Threshold:</span>
+                <span class="value">± {{ (worksite?.humidity_threshold || 0) }} %</span>
+            </div>
+        </div>
     </div>
     <div class="detail-item" *ngIf="reading">
-        <strong>Humidity:</strong> {{reading.humidity}}
+        <strong>Brightness:</strong>
+        <div class="temp-container" [ngStyle]="{'color': reading.anomalous_brightness ? 'red' : 'inherit'}">
+            <div class="temp-item">
+                <span class="label">Current:</span>
+                <span class="value">{{reading.brightness}} Lux </span>
+            </div>
+            <div class="temp-item">
+                <span class="label">Weather read:</span>
+                <span class="value">{{ (reading?.weather_brightness || 0) }} Lux</span>
+            </div>
+            <div class="temp-item">
+                <span class="label">Threshold:</span>
+                <span class="value">± {{ (worksite?.brightness_threshold || 0) }} Lux</span>
+            </div>
+        </div>
+    </div>
+    <!-- Gases -->
+
+    <div class="detail-item" *ngIf="reading">
+        <strong>Gases:</strong>
+        <div class="temp-container" [ngStyle]="{'color': reading.anomalous_temperature ? 'red' : 'inherit'}">
+            <div class="temp-item">
+                <span class="label">Methane:</span>
+                <span class="value" [ngStyle]="{'color': reading.methane ? 'red' : 'inherit'}">
+                    {{reading.methane ? 'Detected' : 'Not detected' }}
+                </span>
+            </div>
+            <div class="temp-item">
+                <span class="label">Carbon monoxide:</span>
+                <span class="value" [ngStyle]="{'color': reading.carbon_monoxide ? 'red' : 'inherit'}">
+                    {{reading.carbon_monoxide ? 'Detected' : 'Not detected' }}
+                </span>
+            </div>
+            <div class="temp-item">
+                <span class="label">Smoke:</span>
+                <span class="value" [ngStyle]="{'color': reading.smoke_detection ? 'red' : 'inherit'}">
+                    {{reading.smoke_detection ? 'Detected' : 'Not detected' }}
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <!-- End gases -->
+
+    <!-- Accessories -->
+
+    <div class="detail-item" *ngIf="reading">
+        <strong>Protections:</strong>
+        <div class="temp-container" [ngStyle]="{'color': reading.anomalous_temperature ? 'red' : 'inherit'}">
+            <div class="temp-item">
+                <span class="label">Welding protection:</span>
+                <span class="value" [ngStyle]="{'color': reading.uses_welding_protection ? 'red' : 'inherit'}">
+                    {{reading.uses_welding_protection ? 'Active' : 'Not plugged in' }}
+                </span>
+            </div>
+            <div class="temp-item">
+                <span class="label">Gas protection:</span>
+                <span class="value" [ngStyle]="{'color': reading.uses_gas_protection ? 'red' : 'inherit'}">
+                    {{ reading.uses_gas_protection ? 'Active' : 'Not plugged in' }}
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <!-- End accessories -->
+
+    <!-- Mean values -->
+
+    <div class="detail-item" *ngIf="reading">
+        <strong>Mean values:</strong>
+        <div class="temp-container" [ngStyle]="{'color': reading.anomalous_temperature ? 'red' : 'inherit'}">
+            <div class="temp-item">
+                <span class="label">X-axis:</span>
+                <span class="value"> {{reading.avg_X}} m/s<sup>2</sup></span>
+            </div>
+            <div class="temp-item">
+                <span class="label">Y-axis:</span>
+                <span class="value"> {{reading.avg_Y}} m/s<sup>2</sup></span>
+            </div>
+            <div class="temp-item">
+                <span class="label">Z-axis:</span>
+                <span class="value"> {{reading.avg_Z}} m/s<sup>2</sup></span>
+            </div>
+            <div class="temp-item">
+                <span class="label">Magnitude:</span>
+                <span class="value"> {{reading.avg_G}} G</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- End mean values -->
+
+    <!-- Standard deviation values -->
+
+    <div class="detail-item" *ngIf="reading">
+        <strong>Standard deviation values:</strong>
+        <div class="temp-container" [ngStyle]="{'color': reading.anomalous_temperature ? 'red' : 'inherit'}">
+            <div class="temp-item">
+                <span class="label">X-axis:</span>
+                <span class="value"> {{reading.std_X}} m/s<sup>2</sup></span>
+            </div>
+            <div class="temp-item">
+                <span class="label">Y-axis:</span>
+                <span class="value"> {{reading.std_Y}} m/s<sup>2</sup></span>
+            </div>
+            <div class="temp-item">
+                <span class="label">Z-axis:</span>
+                <span class="value"> {{reading.std_Z}} m/s<sup>2</sup></span>
+            </div>
+            <div class="temp-item">
+                <span class="label">Magnitude:</span>
+                <span class="value"> {{reading.std_G}} G</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- End standard deviation values -->
+
+    <div class="detail-item" *ngIf="reading">
+        <strong>Max acceleration magnitude value:</strong>
+        <span [ngStyle]="{'color': reading.anomalous_max_g ? 'red' : 'inherit'}">
+            {{reading.max_G}} G
+        </span>
     </div>
     <div class="detail-item" *ngIf="reading">
-        <strong>Brightness:</strong> {{reading.brightness}}
-    </div>
-    <div class="detail-item" *ngIf="reading">
-        <strong>Methane:</strong> {{reading.methane}}
-    </div>
-    <div class="detail-item" *ngIf="reading">
-        <strong>Carbon Monoxide:</strong> {{reading.carbon_monoxide}}
-    </div>
-    <div class="detail-item" *ngIf="reading">
-        <strong>Smoke detection:</strong> {{reading.smoke_detection}}
-    </div>
-    <div class="detail-item" *ngIf="reading">
-        <strong>Uses welding protection:</strong> {{reading.uses_welding_protection}}
-    </div>
-    <div class="detail-item" *ngIf="reading">
-        <strong>Uses gas protection:</strong> {{reading.uses_gas_protection}}
-    </div>
-    <div class="detail-item" *ngIf="reading">
-        <strong>Average X:</strong> {{reading.avg_X}}
-    </div>
-    <div class="detail-item" *ngIf="reading">
-        <strong>Average Y:</strong> {{reading.avg_Y}}
-    </div>
-    <div class="detail-item" *ngIf="reading">
-        <strong>Average Z:</strong> {{reading.avg_Z}}
-    </div>
-    <div class="detail-item" *ngIf="reading">
-        <strong>Average G:</strong> {{reading.avg_G}}
-    </div>
-    <div class="detail-item" *ngIf="reading">
-        <strong>Standard X:</strong> {{reading.std_X}}
-    </div>
-    <div class="detail-item" *ngIf="reading">
-        <strong>Standard Y:</strong> {{reading.std_Y}}
-    </div>
-    <div class="detail-item" *ngIf="reading">
-        <strong>Standard Z:</strong> {{reading.std_Z}}
-    </div>
-    <div class="detail-item" *ngIf="reading">
-        <strong>Standard G:</strong> {{reading.std_G}}
-    </div>
-    <div class="detail-item" *ngIf="reading">
-        <strong>Max G:</strong> {{reading.max_G}}
-    </div>
-    <div class="detail-item" *ngIf="reading">
-        <strong>Incorrect posture:</strong> {{reading.incorrect_posture}}
-    </div>
-    <div class="detail-item anomalous" *ngIf="reading">
-        <strong>Anomalous:</strong>
-        <span [ngStyle]="{'color': reading.anomaly ? 'red' : 'inherit'}">
-            {{reading.anomaly}}
-            <i *ngIf="reading.anomaly" class="pi pi-exclamation-triangle" style="margin-left: 5px;"></i>
+        <strong>Incorrect posture:</strong> 
+        <span [ngStyle]="{'color': reading.anomalous_posture ? 'red' : 'inherit'}">
+            {{reading.incorrect_posture}} %
         </span>
     </div>
 </div>

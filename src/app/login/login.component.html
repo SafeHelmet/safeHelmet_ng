@@ -1,3 +1,4 @@
+<p-toast />
 <div class="login-container">
     <div class="login-card">
         <img src="assets/images/bannerLogo.png" alt="Logo" class="logo">
@@ -16,7 +17,14 @@
                 <input pInputText [(ngModel)]="password" placeholder="Password" type="password" class="inputPassword" />
             </p-inputgroup>
             <br>
-            <p-button icon="pi pi-check" class="buttonSubmit" label="Login" (click)="onLogin()"></p-button>
+            <div class="rowLogin">
+                <div class="colLogin">
+                    <p-button icon="pi pi-angle-left" class="buttonSubmit" label="Back" (click)="back()" severity="contrast"></p-button>
+                </div>
+                <div class="colLogin">
+                    <p-button icon="pi pi-check" class="buttonSubmit" label="Login" (click)="onLogin()"></p-button>
+                </div>
+            </div>
             <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
         </div>
     </div>

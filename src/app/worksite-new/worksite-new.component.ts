@@ -56,7 +56,7 @@ export class WorksiteNewComponent {
       address: ['', Validators.required],
       city: ['', Validators.required],
       state: ['', Validators.required],
-      zip: ['', Validators.required],
+      zip_code: ['', Validators.required],
       start_date_of_work: ['', Validators.required],
       end_date_of_work: ['', Validators.required],
       temperature_threshold: ['', Validators.required],

@@ -1,9 +1,15 @@
+<p-confirmDialog [message]="deleteMessage" header="Confirm" icon="pi pi-exclamation-triangle"
+    [acceptLabel]="'Yes'" [rejectLabel]="'No'" (accept)="onConfirmDelete()" (reject)="onRejectDelete()">
+</p-confirmDialog>
+
+
+
 <div class="row">
     <div class="column">
         <h2>Edit Worksite</h2>
     </div>
     <div class="column">
-        <p-button (click)="back()" icon="pi pi-trash" class="float-right margin-right" label="Delete" />
+        <p-button (click)="confirmDelete()" icon="pi pi-trash" class="float-right margin-right" label="Delete" />
         <p-button (click)="back()" icon="pi pi-angle-left" class="float-right margin-right" label="Back" />
     </div>
 </div>
@@ -44,23 +50,23 @@
         </div>
         <div class="rowForm">
             <label for="temperature_threshold">Temperature threshold:</label>
-            <input id="temperature_threshold" type="text" pInputText formControlName="temperature_threshold" readonly />
+            <input id="temperature_threshold" type="text" pInputText formControlName="temperature_threshold"  />
         </div>
         <div class="rowForm">
             <label for="humidity_threshold">Humidity threshold:</label>
-            <input id="humidity_threshold" type="text" pInputText formControlName="humidity_threshold" readonly />
+            <input id="humidity_threshold" type="text" pInputText formControlName="humidity_threshold"  />
         </div>
         <div class="rowForm">
             <label for="brightness_threshold">Brightness threshold:</label>
-            <input id="brightness_threshold" type="text" pInputText formControlName="brightness_threshold" readonly/>
+            <input id="brightness_threshold" type="text" pInputText formControlName="brightness_threshold" />
         </div>
         <div class="rowForm">
             <label for="posture_threshold">Posture threshold:</label>
-            <input id="posture_threshold" type="text" pInputText formControlName="posture_threshold" readonly />
+            <input id="posture_threshold" type="text" pInputText formControlName="posture_threshold"  />
         </div>
         <div class="rowForm">
             <label for="max_g_threshold">Max g threshold:</label>
-            <input id="max_g_threshold" type="text" pInputText formControlName="max_g_threshold" readonly />
+            <input id="max_g_threshold" type="text" pInputText formControlName="max_g_threshold"  />
         </div>
         <div class="rowForm">
             <label for="latitude">Latitude:</label>

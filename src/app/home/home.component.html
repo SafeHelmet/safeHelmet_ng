@@ -7,21 +7,37 @@
 <div id="main">
     <div id="page">
         <div id="loop">
-            <h1><b>SECURITY</b> IS THE NUMBER <b><i>ONE</i></b> <span>PRIORITY</span> IN EVERY <span><i>CONSTRUCTION
+            <h1><b>SECURITY</b> IS THE NUMBER <b><i>ONE </i></b> <span>PRIORITY</span> IN EVERY <span><i>CONSTRUCTION
                         SITE.</i></span></h1>
-            <h1><b>SECURITY</b> IS THE NUMBER <b><i>ONE</i></b> <span>PRIORITY</span> IN EVERY <span><i>CONSTRUCTION
+            <h1><b>SECURITY</b> IS THE NUMBER <b><i>ONE </i></b> <span>PRIORITY</span> IN EVERY <span><i>CONSTRUCTION
                         SITE.</i></span></h1>
-            <h1><b>SECURITY</b> IS THE NUMBER <b><i>ONE</i></b> <span>PRIORITY</span> IN EVERY <span><i>CONSTRUCTION
+            <h1><b>SECURITY</b> IS THE NUMBER <b><i>ONE </i></b> <span>PRIORITY</span> IN EVERY <span><i>CONSTRUCTION
                         SITE.</i></span></h1>
         </div>
-        <model-viewer src="assets/models/construction_helmet.glb" alt="A 3D model of a helmet" camera-controls="false"
-            interaction-prompt="none" disable-zoom ar style="width: 100%; height: 600px;">
+        <model-viewer src="assets/models/hardhatv7.glb" alt="A 3D model of a helmet" camera-controls="false"
+            interaction-prompt="none" disable-zoom ar style="width: 100%; height: 800px;"
+            model-position="0m 0m 0m" 
+            camera-target="0m 0m 0m" 
+            camera-orbit="-180deg 180deg auto"
+            model-rotation="180deg 180deg 180deg">
         </model-viewer>
 
+    </div>
+    <div id="pageFirst">
+        <div class="ag-format-container">
+            <div class="ag-courses_box-first-title">
+                <p class="construction-font-text size30">A simple construction helmet?</p>
+            </div>
+            <div class="ag-courses_box-first">
+                <p class="construction-font-text-bold size30">Hell Nah. Our product is equipped with an embedded board with sensors that collect critical data, allowing to save workers lives.
+                </p>
+            </div>
+        </div>
     </div>
     <div id="page1">
         <div class="ag-format-container">
             <div class="ag-courses_box">
+                <p class="construction-font-text size30">The ideas that light our path everyday</p>
                 <div class="ag-courses_item">
                     <a href="#" class="ag-courses-item_link">
                         <div class="ag-courses-item_bg"></div>
@@ -50,7 +66,7 @@
                         <div class="ag-courses-item_bg"></div>
         
                         <div class="ag-courses-item_title">
-                            Helmet with Air Quality Sensors
+                            Modular approach
                         </div>
         
                         
@@ -62,7 +78,7 @@
                         <div class="ag-courses-item_bg"></div>
         
                         <div class="ag-courses-item_title">
-                            PM10 Smoke and Methane Monitoring
+                            CO, Smoke and Methane Monitoring
                         </div>
         
                         
@@ -96,7 +112,7 @@
                         <div class="ag-courses-item_bg">
                         </div>
                         <div class="ag-courses-item_title">
-                            Protecting our emplyees
+                            Protecting our employees
                         </div>
                     </a>
                 </div>
@@ -119,27 +135,66 @@
     <div id="page2">
         <div class="ag-format-container">
             <div class="ag-courses_box">
-                <div class="ag-title">
-                    Using the latest technologies to guarantee results
-                </div>
+                <p class="construction-font-text size30">From this little ESP32 board we can save lifes</p>
             </div>
+        </div>
+        <!-- <model-viewer src="assets/models/esp32.glb" alt="A 3D model of an ESP32 board" camera-controls="false"
+            interaction-prompt="none" disable-zoom ar style="width: 100%; height: 500px; background-color: #000000;"
+            model-position="0m 0m 0m" 
+            camera-target="0m 0m 0m" 
+            camera-orbit="180deg 120deg auto">
+        </model-viewer> -->
+        <div class="sketchfab-embed-wrapper"> 
+            <iframe title="NodeMCU ESP32" frameborder="0" allowfullscreen
+                mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking"
+                xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share
+                src="https://sketchfab.com/models/a09ed2e58a4248ffb1ab5e6597754f18/embed?autostart=1&transparent=1&ui_hint=0&dnt=1">
+            </iframe> 
+        </div>
+        
+    </div>
+    
+    <div id="page4">
+        <div class="ag-format-container">
             <div class="ag-courses_box">
-                <div class="logo-container-tech">
-                    <img src="assets/images/ble-logo.webp" alt="Bluetooth Low Energy" class="logo-tech" />
-                    
-                    <img src="assets/images/iot-logo.png" alt="Smart Helmet for Worker Safety" class="logo-tech" />
-                    
-                    <img src="assets/images/arduino-logo.png" alt="Smart Helmet for Worker Safety" class="logo-tech" />
-                    
-                </div>
-                <div class="logo-text-container-tech">
-                    <p class="logo-tech logo-text">Bluetooth Low Enery</p>
-                    <p class="logo-tech logo-text">Internet of things</p>
-                    <p class="logo-tech logo-text">Arduino</p>
+                <p style="text-align: left;" class="construction-font-text size30">Supported by the best technologies</p>
+                <div class="strangeCarouselContainer" id="c1">
+                    <p-carousel [value]="logos" [numVisible]="3" [numScroll]="1" [circular]="true" autoplayInterval="3000">
+                        <ng-template let-logo #item>
+                            <div class="carousel-item">
+                                <div class="border border-surface-200 dark:border-surface-700 rounded m-2 p-4">
+                                    <div class="mb-4">
+                                        <div class="relative mx-auto">
+                                            <img src="{{ logo.src }}" [alt]="logo.alt" class="carousel-image" />
+                                        </div>
+                                    </div>
+                                    <div class="mb-4 font-medium textCarouselLogo construction-font-text">{{ logo.text }}</div>
+                                </div>
+                            </div>
+                        </ng-template>
+                    </p-carousel>
+
                 </div>
             </div>
-
         </div>
     </div>
-    <div id="page3"></div>
+    <div id="page5">
+        <div class="ag-format-container-contact">
+            <div class="ag-courses_box-contact">
+                <p class="construction-font-text size30">What are you waiting for?</p>
+            </div>
+            <p class="construction-font-text size30">Contact us:</p>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i class="pi pi-phone icon"></i>
+                    <span class="contact-text">+1 234 567 890</span>
+                </div>
+                <div class="contact-item">
+                    <i class="pi pi-envelope icon"></i>
+                    <span class="contact-text">contact&#64;example.com</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
 </div>

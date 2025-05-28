@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { RESOLVE_ENV } from '../../environments/environment';
 import { ENVIRONMENT } from "../../../etc/secrets/environment.prod";
+import { AssignBodyPojo } from '../models/assignBodyPojo';
 
 
 @Injectable({
@@ -37,6 +38,7 @@ export class WorksiteService {
   }
 
   updateWorksite(id: string, worksite: any): Observable<any> {
+    console.log('Worksite ID:', id);
     const headers = new HttpHeaders().set('Authorization', ENVIRONMENT.AUTH_TOKEN);
     return this.http.put(RESOLVE_ENV.API.ROUTES.WORKSITE.UPDATE(id), worksite, { headers });
   }
@@ -54,6 +56,11 @@ export class WorksiteService {
   getReadings(id: string): Observable<any> {
     const headers = new HttpHeaders().set('Authorization', ENVIRONMENT.AUTH_TOKEN);
     return this.http.get(RESOLVE_ENV.API.ROUTES.WORKSITE.GET_READINGS(id), { headers });
+  }
+
+  getWorkerReadings(id: string): Observable<any> {
+    const headers = new HttpHeaders().set('Authorization', ENVIRONMENT.AUTH_TOKEN);
+    return this.http.get(RESOLVE_ENV.API.ROUTES.WORKERS.GET_READINGS(id), { headers });
   }
 
   getHelmets(): Observable<any> {
@@ -79,5 +86,20 @@ export class WorksiteService {
   deleteWorker(id: string): Observable<any> {
     const headers = new HttpHeaders().set('Authorization', ENVIRONMENT.AUTH_TOKEN);
     return this.http.delete(RESOLVE_ENV.API.ROUTES.WORKERS.DELETE(id), { headers });
+  }
+
+  assignWorker(assignBodyPojo: AssignBodyPojo): Observable<any> {
+    const headers = new HttpHeaders().set('Authorization', ENVIRONMENT.AUTH_TOKEN);
+    return this.http.post(RESOLVE_ENV.API.ROUTES.WORKSITE.ASSIGN_WORKER, assignBodyPojo, { headers });
+  }
+
+  createWorker(worker: any): Observable<any> {
+    const headers = new HttpHeaders().set('Authorization', ENVIRONMENT.AUTH_TOKEN);
+    return this.http.post(RESOLVE_ENV.API.ROUTES.WORKERS.BASE, worker, { headers });
+  }
+
+  getWorkerWorksite(id: string): Observable<any> {
+    const headers = new HttpHeaders().set('Authorization', ENVIRONMENT.AUTH_TOKEN);
+    return this.http.get(RESOLVE_ENV.API.ROUTES.WORKERS.GET_WORKSITES(id), { headers });
   }
 } 

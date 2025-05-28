@@ -2,8 +2,8 @@ import { Category } from './category';
 
 export interface Helmet {
     id?: number;
-    category_id?: number;
+    category_id: number;
     created_at?: string; 
     Category?: Category;
-    uuid: string;
+    mac_address: string;
 }
